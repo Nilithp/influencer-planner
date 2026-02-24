@@ -1,0 +1,176 @@
+/* Form Inputs */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  line-height: 1.5;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--purple-primary);
+  box-shadow: 0 0 0 3px rgba(145,70,255,0.15), 0 0 12px rgba(145,70,255,0.08);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+textarea { resize: vertical; min-height: 80px; }
+select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23848494' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.85rem center; padding-right: 2.5rem; }
+
+/* Inline inputs (short) */
+input.input-inline {
+  width: auto; display: inline-block;
+  min-width: 100px; max-width: 200px;
+}
+input.input-sm { max-width: 100px; }
+input.input-md { max-width: 200px; }
+input.input-lg { max-width: 400px; }
+input.input-money { max-width: 150px; padding-left: 1.5rem; }
+.input-money-wrap { position: relative; display: inline-block; }
+.input-money-wrap::before {
+  content: "$"; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); font-size: 0.9rem;
+}
+
+/* Checkboxes */
+.checkbox-wrap {
+  display: flex; align-items: flex-start; gap: 0.65rem;
+  padding: 0.4rem 0; cursor: pointer;
+}
+.checkbox-wrap input[type="checkbox"] {
+  width: 18px; height: 18px; min-width: 18px;
+  appearance: none; -webkit-appearance: none;
+  background: var(--bg-primary); border: 2px solid var(--border);
+  border-radius: 4px; cursor: pointer;
+  position: relative; margin-top: 2px;
+  transition: all 0.2s;
+}
+.checkbox-wrap input[type="checkbox"]:checked {
+  background: var(--purple-primary); border-color: var(--purple-primary);
+}
+.checkbox-wrap input[type="checkbox"]:checked::after {
+  content: "\2713"; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  color: #fff; font-size: 12px; font-weight: 700;
+}
+.checkbox-wrap input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 3px rgba(145,70,255,0.2);
+}
+.checkbox-wrap label {
+  font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; line-height: 1.5;
+}
+.checkbox-wrap.checked label { color: var(--text-primary); }
+
+/* Radio groups */
+.radio-group { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.radio-wrap { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; }
+.radio-wrap input[type="radio"] {
+  width: 18px; height: 18px; min-width: 18px;
+  appearance: none; -webkit-appearance: none;
+  background: var(--bg-primary); border: 2px solid var(--border);
+  border-radius: 50%; cursor: pointer;
+  position: relative; transition: all 0.2s;
+}
+.radio-wrap input[type="radio"]:checked { border-color: var(--purple-primary); }
+.radio-wrap input[type="radio"]:checked::after {
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--purple-primary);
+}
+.radio-wrap label { font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; }
+
+/* Form groups */
+.form-group { margin-bottom: 1.25rem; }
+.form-group > label,
+.form-label {
+  display: block; font-size: 0.85rem; font-weight: 600;
+  color: var(--text-primary); margin-bottom: 0.35rem;
+}
+.form-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+.form-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.form-row > .form-group { flex: 1; min-width: 200px; }
+
+/* Field with label inline */
+.field-inline {
+  display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;
+}
+.field-inline label { white-space: nowrap; font-size: 0.85rem; color: var(--text-secondary); min-width: fit-content; }
+.field-inline input { flex: 1; }
+
+/* Section progress bar */
+.section-progress { margin: 1rem 0 2rem; }
+.section-progress-bar {
+  height: 6px; background: rgba(145,70,255,0.1); border-radius: 3px; overflow: hidden;
+}
+.section-progress-fill {
+  height: 100%; border-radius: 3px;
+  background: var(--gradient-purple);
+  transition: width 0.5s ease;
+}
+.section-progress-text {
+  font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;
+  display: flex; justify-content: space-between;
+}
+
+/* Plan sidebar nav */
+.plan-layout { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; }
+.plan-sidebar {
+  position: sticky; top: 72px; align-self: start;
+  max-height: calc(100vh - 88px); overflow-y: auto;
+  padding-right: 0.5rem;
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+.plan-sidebar a {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0.75rem; border-radius: 8px;
+  font-size: 0.82rem; color: var(--text-muted);
+  text-decoration: none; transition: all 0.2s;
+  margin-bottom: 2px;
+}
+.plan-sidebar a:hover { color: var(--text-primary); background: var(--bg-card); }
+.plan-sidebar a.active { color: var(--purple-light); background: rgba(145,70,255,0.1); }
+.plan-sidebar .sidebar-progress {
+  width: 28px; height: 4px; border-radius: 2px;
+  background: rgba(145,70,255,0.15); overflow: hidden; flex-shrink: 0;
+}
+.plan-sidebar .sidebar-progress-fill { height: 100%; border-radius: 2px; background: var(--purple-primary); }
+
+/* Table inputs */
+table input[type="text"],
+table input[type="number"],
+table select {
+  background: transparent; border: 1px solid transparent;
+  border-radius: 4px; padding: 0.35rem 0.5rem;
+  font-size: 0.85rem; width: 100%;
+}
+table input:focus, table select:focus {
+  border-color: var(--purple-primary);
+  background: var(--bg-primary);
+}
+table input::placeholder { color: var(--text-muted); opacity: 0.5; }
+
+/* Saved indicator */
+.save-indicator {
+  font-size: 0.75rem; color: var(--green); opacity: 0;
+  transition: opacity 0.3s;
+}
+.save-indicator.visible { opacity: 1; }
+
+@media (max-width: 900px) {
+  .plan-layout { grid-template-columns: 1fr; }
+  .plan-sidebar { display: none; }
+}

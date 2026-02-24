@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Influencer Planner — Dashboard</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/forms.css">
+<style>
+  .dashboard-hero {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background: radial-gradient(ellipse at 50% 0%, rgba(145,70,255,0.15) 0%, transparent 60%);
+  }
+  .dashboard-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+  .dashboard-hero p { color: var(--text-secondary); font-size: 1.1rem; }
+
+  .progress-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+    display: block;
+  }
+  .progress-card:hover {
+    border-color: var(--purple-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(145,70,255,0.1);
+  }
+  .progress-card h3 {
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .progress-card .pct {
+    font-size: 2rem; font-weight: 900;
+    background: var(--gradient-purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .progress-card .bar-track {
+    height: 6px; background: rgba(145,70,255,0.1);
+    border-radius: 3px; overflow: hidden; margin-top: 0.75rem;
+  }
+  .progress-card .bar-fill {
+    height: 100%; border-radius: 3px;
+    background: var(--gradient-purple);
+    transition: width 0.8s ease;
+  }
+  .progress-card .meta {
+    font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;
+  }
+
+  .quick-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin: 2rem 0; }
+
+  .overall-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .overall-card .big-pct {
+    font-size: 4rem; font-weight: 900;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">INFLUENCER PLANNER</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Dashboard</a>
+    <a href="plan.html">Business Plan</a>
+    <a href="deep-dive.html">Twitch Deep Dive</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="templates.html">Templates</a>
+    <a href="financials.html">Financials</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="my-plan.html">My Plan</a>
+  </div>
+</nav>
+
+<header class="dashboard-hero">
+  <h1>Influencer Planner</h1>
+  <p>Your roadmap to 1M highly engaged, high-buying-power active users</p>
+</header>
+
+<div class="container" style="padding-top:1.5rem;">
+
+  <!-- Overall Progress -->
+  <div class="overall-card">
+    <div class="big-pct" id="overall-pct">0%</div>
+    <p style="color:var(--text-secondary);margin-top:0.25rem;">Overall Plan Completion</p>
+    <div style="max-width:400px;margin:1rem auto 0;">
+      <div class="bar-track" style="height:8px;background:rgba(145,70,255,0.1);border-radius:4px;overflow:hidden;">
+        <div class="bar-fill" id="overall-bar" style="height:100%;border-radius:4px;background:var(--gradient-hero);width:0%;transition:width 0.8s ease;"></div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;" id="last-modified"></p>
+  </div>
+
+  <!-- Section Progress Cards -->
+  <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-bottom:2rem;" id="progress-cards">
+  </div>
+
+  <!-- Quick Actions -->
+  <h3 style="text-align:center;margin-bottom:1rem;color:var(--text-secondary);">Quick Actions</h3>
+  <div class="quick-actions">
+    <a href="plan.html" class="btn btn-primary">Start Business Plan</a>
+    <a href="checklist.html" class="btn btn-secondary">30-Day Checklist</a>
+    <a href="deep-dive.html" class="btn btn-secondary">Twitch Deep Dive</a>
+    <a href="financials.html" class="btn btn-secondary">Financial Projections</a>
+    <a href="calendar.html" class="btn btn-secondary">Content Calendar</a>
+    <a href="templates.html" class="btn btn-secondary">Sponsor Templates</a>
+    <a href="my-plan.html" class="btn btn-success">View My Plan & Export PDF</a>
+  </div>
+
+  <!-- Getting Started -->
+  <div class="callout callout-info" style="margin-top:2rem;">
+    <div class="callout-icon">&#x1f4a1;</div>
+    <div class="callout-text">
+      <strong>Getting Started</strong>
+      Start with the <a href="plan.html">Business Plan</a> — fill in Section 1 (Executive Summary) first. Then work through the <a href="checklist.html">30-Day Checklist</a> to build your foundation. All your data saves automatically to your browser and can be exported anytime from <a href="my-plan.html">My Plan</a>.
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <p>Influencer Planner &mdash; Your roadmap to 1M engaged users</p>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = [
+    { key: 'plan', title: 'Business Plan', icon: '&#x1f4cb;', href: 'plan.html', desc: '14 sections covering strategy, audience, monetization, and operations' },
+    { key: 'checklist', title: '30-Day Checklist', icon: '&#x2705;', href: 'checklist.html', desc: 'Week-by-week launch checklist with progress tracking' },
+    { key: 'templates', title: 'Sponsor Templates', icon: '&#x1f4e7;', href: 'templates.html', desc: 'Outreach emails, media kit, rate card, and deliverables' },
+    { key: 'financials', title: 'Financial Projections', icon: '&#x1f4b0;', href: 'financials.html', desc: '36-month revenue and expense forecasting spreadsheet' },
+    { key: 'calendar', title: 'Content Calendar', icon: '&#x1f4c5;', href: 'calendar.html', desc: 'Weekly content planner with time blocks and activity tracking' },
+    { key: 'deepDive', title: 'Twitch Deep Dive', icon: '&#x1f3ae;', href: 'deep-dive.html', desc: 'Platform statistics, algorithm insights, and growth benchmarks' },
+  ];
+
+  const stats = Progress.getStats();
+  let totalFilled = 0, totalFields = 0;
+
+  const container = document.getElementById('progress-cards');
+  cards.forEach(c => {
+    const s = stats[c.key] || { filled: 0, total: 0, pct: 0 };
+    totalFilled += s.filled;
+    totalFields += s.total;
+
+    const card = document.createElement('a');
+    card.href = c.href;
+    card.className = 'progress-card';
+    card.innerHTML = `
+      <h3><span>${c.icon}</span> ${c.title}</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.5rem;">${c.desc}</p>
+      <div class="pct">${s.pct}%</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${s.pct}%"></div></div>
+      <div class="meta">${s.filled} of ${s.total} fields completed</div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Overall
+  const overallPct = totalFields > 0 ? Math.round((totalFilled / totalFields) * 100) : 0;
+  document.getElementById('overall-pct').textContent = overallPct + '%';
+  document.getElementById('overall-bar').style.width = overallPct + '%';
+
+  // Last modified
+  const lm = Store.getLastModified();
+  if (lm) {
+    document.getElementById('last-modified').textContent = 'Last updated: ' + new Date(lm).toLocaleString();
+  }
+});
+</script>
+</body>
+</html>

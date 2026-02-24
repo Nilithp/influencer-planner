@@ -1,0 +1,20 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Source content (not needed for the web app)
+business-plan-template.md
+twitch-deep-dive.html
+twitch-platform-deep-dive.md
+Twitch_Statistics_Research_2024-2026.md
+checklists/
+templates/
+worksheets/

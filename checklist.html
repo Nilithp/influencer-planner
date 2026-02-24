@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30-Day Quick-Start Checklist — Influencer Planner</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">INFLUENCER PLANNER</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Dashboard</a>
+    <a href="plan.html">Business Plan</a>
+    <a href="deep-dive.html">Twitch Deep Dive</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="templates.html">Templates</a>
+    <a href="financials.html">Financials</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="my-plan.html">My Plan</a>
+  </div>
+</nav>
+
+<!-- ===== PAGE HEADER ===== -->
+<header class="page-header">
+  <h1 class="gradient-text">30-Day Quick-Start Checklist</h1>
+  <p>Your step-by-step launch plan from zero to streaming. Check off each item as you go &mdash; progress auto-saves.</p>
+  <span class="save-indicator">Saved</span>
+</header>
+
+<!-- ===== OVERALL PROGRESS ===== -->
+<div class="container" style="margin-top: 1.5rem;">
+  <div class="section-progress" style="margin-bottom: 2.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+      <strong style="font-size: 0.9rem;">Overall Progress</strong>
+      <div class="overall-progress-text" style="font-size: 0.8rem; color: var(--text-muted);">
+        <span class="pct">0%</span> &nbsp;|&nbsp; <span class="count">0/0</span>
+      </div>
+    </div>
+    <div class="section-progress-bar" style="height: 10px; border-radius: 5px;">
+      <div class="overall-progress-fill section-progress-fill" style="width: 0%; height: 100%; border-radius: 5px; background: var(--gradient-hero);"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PREREQUISITES (Before Day 1)
+       ============================================================ -->
+  <div class="accordion-item open" data-section="checklist-prereqs">
+    <button class="accordion-header">
+      <span>Before Day 1: Prerequisites</span>
+      <span class="accordion-arrow">&#9660;</span>
+    </button>
+    <div class="accordion-body">
+      <div class="section-progress">
+        <div class="section-progress-bar"><div class="section-progress-fill" style="width:0%"></div></div>
+        <div class="section-progress-text"><span class="pct">0%</span><span class="count">0/0</span></div>
+      </div>
+
+      <div class="card-full">
+        <div class="field-inline">
+          <label>Financial runway confirmed: I have $</label>
+          <div class="input-money-wrap">
+            <input type="text" class="input-inline input-sm" data-field="checklist.prereqs.savings" placeholder="amount">
+          </div>
+          <label>saved, covering</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.prereqs.runwayMonths" placeholder="#">
+          <label>months</label>
+        </div>
+
+        <div class="field-inline">
+          <label>Time commitment confirmed: I can dedicate</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.prereqs.hoursPerWeek" placeholder="#">
+          <label>hrs/week</label>
+        </div>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="prereqs-support" data-field="checklist.prereqs.supportInformed">
+          <label for="prereqs-support">Support system informed: Family/partner knows</label>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.75rem;">
+          <label class="form-label">Backup income plan</label>
+          <input type="text" data-field="checklist.prereqs.backupPlan" placeholder="Describe your backup plan...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       WEEK 1: BUILD THE FOUNDATION
+       ============================================================ -->
+  <div class="accordion-item open" data-section="checklist-week1">
+    <button class="accordion-header">
+      <span>Week 1: Build the Foundation (Days 1-7)</span>
+      <span class="accordion-arrow">&#9660;</span>
+    </button>
+    <div class="accordion-body">
+      <div class="section-progress">
+        <div class="section-progress-bar"><div class="section-progress-fill" style="width:0%"></div></div>
+        <div class="section-progress-text"><span class="pct">0%</span><span class="count">0/0</span></div>
+      </div>
+
+      <!-- Day 1-2: Brand Identity -->
+      <div class="card-full">
+        <h3>Day 1-2: Brand Identity</h3>
+
+        <div class="form-group">
+          <label class="form-label">Choose brand name</label>
+          <input type="text" class="input-lg" data-field="checklist.week1.brandName" placeholder="Your brand name">
+        </div>
+
+        <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--purple-light);">Register handle on ALL platforms:</p>
+
+        <div class="field-inline">
+          <label>Twitch @</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleTwitch" placeholder="handle">
+        </div>
+        <div class="field-inline">
+          <label>YouTube @</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleYouTube" placeholder="handle">
+        </div>
+        <div class="field-inline">
+          <label>X (Twitter) @</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleX" placeholder="handle">
+        </div>
+        <div class="field-inline">
+          <label>Facebook</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleFacebook" placeholder="page name">
+        </div>
+        <div class="field-inline">
+          <label>Tumblr @</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleTumblr" placeholder="handle">
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-discord-created" data-field="checklist.week1.discordCreated">
+          <label for="w1-discord-created">Discord server created</label>
+        </div>
+        <div class="field-inline">
+          <label>TikTok @</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleTikTok" placeholder="handle">
+        </div>
+        <div class="field-inline">
+          <label>Instagram @</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleInstagram" placeholder="handle">
+        </div>
+        <div class="field-inline">
+          <label>Reddit u/</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.handleReddit" placeholder="username">
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="w1-pfp" data-field="checklist.week1.profilePicture">
+            <label for="w1-pfp">Create profile picture</label>
+          </div>
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="w1-banner" data-field="checklist.week1.bannerHeader">
+            <label for="w1-banner">Create banner/header</label>
+          </div>
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="w1-bio" data-field="checklist.week1.bioTemplate">
+            <label for="w1-bio">Write bio template</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 3-4: Technical Setup -->
+      <div class="card-full">
+        <h3>Day 3-4: Technical Setup</h3>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-pc" data-field="checklist.week1.pcTested">
+          <label for="w1-pc">Streaming PC tested</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-camera" data-field="checklist.week1.cameraMounted">
+          <label for="w1-camera">Camera mounted</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-mic" data-field="checklist.week1.micTested">
+          <label for="w1-mic">Microphone tested</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-lighting" data-field="checklist.week1.lightingSetup">
+          <label for="w1-lighting">Lighting set up</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-obs" data-field="checklist.week1.obsInstalled">
+          <label for="w1-obs">OBS installed and configured</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-teststream" data-field="checklist.week1.testStream">
+          <label for="w1-teststream">Test stream completed</label>
+        </div>
+
+        <div class="field-inline" style="margin-top: 0.5rem;">
+          <label>Internet speed tested:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week1.internetSpeed" placeholder="speed">
+          <label>Mbps</label>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.5rem;">
+          <label class="form-label">Backup plan</label>
+          <input type="text" data-field="checklist.week1.techBackupPlan" placeholder="What if something breaks?">
+        </div>
+      </div>
+
+      <!-- Day 5: Stream Configuration -->
+      <div class="card-full">
+        <h3>Day 5: Stream Configuration</h3>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-scenes" data-field="checklist.week1.obsScenes">
+          <label for="w1-scenes">OBS scenes created</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-overlays" data-field="checklist.week1.overlaysInstalled">
+          <label for="w1-overlays">Basic overlays installed</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-alerts" data-field="checklist.week1.alertSounds">
+          <label for="w1-alerts">Alert sounds configured</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-chatbot" data-field="checklist.week1.chatBot">
+          <label for="w1-chatbot">Chat bot installed</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-points" data-field="checklist.week1.channelPoints">
+          <label for="w1-points">Channel points enabled</label>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.75rem;">
+          <label class="form-label">Stream title formula</label>
+          <input type="text" data-field="checklist.week1.titleFormula" placeholder="e.g., [Game] | [Hook] | !socials">
+        </div>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-tags" data-field="checklist.week1.categoryTags">
+          <label for="w1-tags">Category/tags selected</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-panels" data-field="checklist.week1.panelsCreated">
+          <label for="w1-panels">Panels created</label>
+        </div>
+      </div>
+
+      <!-- Day 6: Content Strategy -->
+      <div class="card-full">
+        <h3>Day 6: Content Strategy</h3>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-uvp" data-field="checklist.week1.uvpWritten">
+          <label for="w1-uvp">UVP (Unique Value Proposition) written</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-personas" data-field="checklist.week1.personasDefined">
+          <label for="w1-personas">3 audience personas defined</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-pillars" data-field="checklist.week1.contentPillars">
+          <label for="w1-pillars">Content pillars defined</label>
+        </div>
+
+        <p style="font-size: 0.9rem; font-weight: 600; margin: 1rem 0 0.75rem; color: var(--purple-light);">Stream schedule set:</p>
+
+        <div class="field-inline">
+          <label>Day 1:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.schedDay1Game" placeholder="Game / Content">
+          <label>at</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week1.schedDay1Time" placeholder="Time">
+        </div>
+        <div class="field-inline">
+          <label>Day 2:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.schedDay2Game" placeholder="Game / Content">
+          <label>at</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week1.schedDay2Time" placeholder="Time">
+        </div>
+        <div class="field-inline">
+          <label>Day 3:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.schedDay3Game" placeholder="Game / Content">
+          <label>at</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week1.schedDay3Time" placeholder="Time">
+        </div>
+        <div class="field-inline">
+          <label>Day 4:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week1.schedDay4Game" placeholder="Game / Content">
+          <label>at</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week1.schedDay4Time" placeholder="Time">
+        </div>
+
+        <div class="checkbox-wrap" style="margin-top: 0.5rem;">
+          <input type="checkbox" id="w1-schedposted" data-field="checklist.week1.schedulePosted">
+          <label for="w1-schedposted">Schedule posted</label>
+        </div>
+      </div>
+
+      <!-- Day 7: Community Setup -->
+      <div class="card-full">
+        <h3>Day 7: Community Setup</h3>
+
+        <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--purple-light);">Discord server structure:</p>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-welcome" data-field="checklist.week1.discordWelcome">
+          <label for="w1-dc-welcome">#welcome channel</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-rules" data-field="checklist.week1.discordRules">
+          <label for="w1-dc-rules">#rules channel</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-announce" data-field="checklist.week1.discordAnnouncements">
+          <label for="w1-dc-announce">#announcements channel</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-general" data-field="checklist.week1.discordGeneralChat">
+          <label for="w1-dc-general">#general-chat channel</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-stream" data-field="checklist.week1.discordStreamDiscussion">
+          <label for="w1-dc-stream">#stream-discussion channel</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-clips" data-field="checklist.week1.discordClips">
+          <label for="w1-dc-clips">#clips channel</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-offtopic" data-field="checklist.week1.discordOffTopic">
+          <label for="w1-dc-offtopic">#off-topic channel</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w1-dc-voice" data-field="checklist.week1.discordVoice">
+          <label for="w1-dc-voice">Voice channels created</label>
+        </div>
+
+        <div style="margin-top: 0.75rem;">
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="w1-dc-bot" data-field="checklist.week1.discordBotConfigured">
+            <label for="w1-dc-bot">Discord bot configured</label>
+          </div>
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="w1-dc-rulesposted" data-field="checklist.week1.discordRulesPosted">
+            <label for="w1-dc-rulesposted">Server rules posted</label>
+          </div>
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="w1-dc-invite" data-field="checklist.week1.discordInviteReady">
+            <label for="w1-dc-invite">Invite link ready</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       WEEK 2: LAUNCH
+       ============================================================ -->
+  <div class="accordion-item" data-section="checklist-week2">
+    <button class="accordion-header">
+      <span>Week 2: Launch (Days 8-14)</span>
+      <span class="accordion-arrow">&#9660;</span>
+    </button>
+    <div class="accordion-body">
+      <div class="section-progress">
+        <div class="section-progress-bar"><div class="section-progress-fill" style="width:0%"></div></div>
+        <div class="section-progress-text"><span class="pct">0%</span><span class="count">0/0</span></div>
+      </div>
+
+      <!-- First Stream -->
+      <div class="card-full">
+        <h3>First Stream</h3>
+
+        <div class="field-inline">
+          <label>Date:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week2.stream1Date" placeholder="MM/DD">
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s1-ontime" data-field="checklist.week2.stream1OnTime">
+          <label for="w2-s1-ontime">Went live on time</label>
+        </div>
+        <div class="field-inline">
+          <label>Streamed</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week2.stream1Hours" placeholder="#">
+          <label>hours</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s1-chat" data-field="checklist.week2.stream1Chatted">
+          <label for="w2-s1-chat">Interacted with chatters</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s1-raid" data-field="checklist.week2.stream1Raided">
+          <label for="w2-s1-raid">Raided someone</label>
+        </div>
+        <div class="form-group" style="margin-top: 0.75rem;">
+          <label class="form-label">What went well?</label>
+          <textarea data-field="checklist.week2.stream1WentWell" placeholder="Reflect on your first stream..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What to fix?</label>
+          <textarea data-field="checklist.week2.stream1ToFix" placeholder="What needs improvement?"></textarea>
+        </div>
+      </div>
+
+      <!-- Second Stream -->
+      <div class="card-full">
+        <h3>Second Stream</h3>
+
+        <div class="field-inline">
+          <label>Date:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week2.stream2Date" placeholder="MM/DD">
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s2-fix" data-field="checklist.week2.stream2AppliedFix">
+          <label for="w2-s2-fix">Applied fix from first stream</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s2-raid" data-field="checklist.week2.stream2Raided">
+          <label for="w2-s2-raid">Raided someone new</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s2-clip" data-field="checklist.week2.stream2Clip">
+          <label for="w2-s2-clip">Captured clip</label>
+        </div>
+      </div>
+
+      <!-- Third Stream -->
+      <div class="card-full">
+        <h3>Third Stream</h3>
+
+        <div class="field-inline">
+          <label>Date:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week2.stream3Date" placeholder="MM/DD">
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s3-consistent" data-field="checklist.week2.stream3Consistent">
+          <label for="w2-s3-consistent">Schedule consistency maintained</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s3-raid" data-field="checklist.week2.stream3Raided">
+          <label for="w2-s3-raid">Raided someone new</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-s3-clip" data-field="checklist.week2.stream3Clip">
+          <label for="w2-s3-clip">Captured clip</label>
+        </div>
+      </div>
+
+      <!-- Cross-Platform -->
+      <div class="card-full">
+        <h3>Cross-Platform Content</h3>
+
+        <div class="field-inline">
+          <label>X posts:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week2.xPosts" placeholder="#">
+          <label>times</label>
+        </div>
+        <div class="field-inline">
+          <label>Facebook posts:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week2.fbPosts" placeholder="#">
+          <label>times</label>
+        </div>
+        <div class="field-inline">
+          <label>Tumblr posts:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week2.tumblrPosts" placeholder="#">
+          <label>times</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-ytshort" data-field="checklist.week2.firstYTShort">
+          <label for="w2-ytshort">First YouTube Short uploaded</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-discord-shared" data-field="checklist.week2.discordInviteShared">
+          <label for="w2-discord-shared">Discord invite shared</label>
+        </div>
+      </div>
+
+      <!-- Networking -->
+      <div class="card-full">
+        <h3>Networking</h3>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-net-chats" data-field="checklist.week2.engagedChats">
+          <label for="w2-net-chats">Engaged in 5+ other streamers' chats</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-net-follow" data-field="checklist.week2.followedCreators">
+          <label for="w2-net-follow">Followed 10+ creators in niche</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w2-net-discord" data-field="checklist.week2.joinedDiscords">
+          <label for="w2-net-discord">Joined 2-3 community Discords</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       WEEK 3: BUILD RHYTHM
+       ============================================================ -->
+  <div class="accordion-item" data-section="checklist-week3">
+    <button class="accordion-header">
+      <span>Week 3: Build Rhythm (Days 15-21)</span>
+      <span class="accordion-arrow">&#9660;</span>
+    </button>
+    <div class="accordion-body">
+      <div class="section-progress">
+        <div class="section-progress-bar"><div class="section-progress-fill" style="width:0%"></div></div>
+        <div class="section-progress-text"><span class="pct">0%</span><span class="count">0/0</span></div>
+      </div>
+
+      <!-- Consistency -->
+      <div class="card-full">
+        <h3>Consistency</h3>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-sched" data-field="checklist.week3.streamedEveryDay">
+          <label for="w3-sched">Streamed every scheduled day</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-ontime" data-field="checklist.week3.startedOnTime">
+          <label for="w3-ontime">Started within 5 min of scheduled time each stream</label>
+        </div>
+
+        <div class="field-inline" style="margin-top: 0.5rem;">
+          <label>Average stream length:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week3.avgStreamLength" placeholder="#">
+          <label>hrs (target:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week3.targetStreamLength" placeholder="#">
+          <label>hrs)</label>
+        </div>
+      </div>
+
+      <!-- Content Expansion -->
+      <div class="card-full">
+        <h3>Content Expansion</h3>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-ytshorts" data-field="checklist.week3.ytShorts3Plus">
+          <label for="w3-ytshorts">Uploaded 3+ YouTube Shorts</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-bestformat" data-field="checklist.week3.bestFormatIdentified">
+          <label for="w3-bestformat">Identified best-performing format</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-batch" data-field="checklist.week3.batchCreating">
+          <label for="w3-batch">Started batch-creating content</label>
+        </div>
+      </div>
+
+      <!-- Community Growth -->
+      <div class="card-full">
+        <h3>Community Growth</h3>
+
+        <div class="field-inline">
+          <label>Discord members:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week3.discordMembers" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>Twitch followers:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week3.twitchFollowers" placeholder="#">
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-engaging" data-field="checklist.week3.engagingDaily">
+          <label for="w3-engaging">Still engaging daily in other communities</label>
+        </div>
+      </div>
+
+      <!-- Analytics Review -->
+      <div class="card-full">
+        <h3>Analytics Review</h3>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-analytics" data-field="checklist.week3.reviewedAnalytics">
+          <label for="w3-analytics">Reviewed analytics dashboard</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-peakchat" data-field="checklist.week3.peakChatMoments">
+          <label for="w3-peakchat">Identified peak chat moments</label>
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-peakview" data-field="checklist.week3.highestViewership">
+          <label for="w3-peakview">Identified highest viewership segment</label>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.75rem;">
+          <label class="form-label">One thing to change</label>
+          <input type="text" data-field="checklist.week3.oneChange" placeholder="What will you adjust?">
+        </div>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="w3-implemented" data-field="checklist.week3.changeImplemented">
+          <label for="w3-implemented">Change implemented</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       WEEK 4: EVALUATE & PLAN FORWARD
+       ============================================================ -->
+  <div class="accordion-item" data-section="checklist-week4">
+    <button class="accordion-header">
+      <span>Week 4: Evaluate &amp; Plan Forward (Days 22-30)</span>
+      <span class="accordion-arrow">&#9660;</span>
+    </button>
+    <div class="accordion-body">
+      <div class="section-progress">
+        <div class="section-progress-bar"><div class="section-progress-fill" style="width:0%"></div></div>
+        <div class="section-progress-text"><span class="pct">0%</span><span class="count">0/0</span></div>
+      </div>
+
+      <!-- Month 1 Metrics -->
+      <div class="card-full">
+        <h3>Month 1 Metrics</h3>
+
+        <div class="field-inline">
+          <label>Avg concurrent viewers:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.avgConcurrentViewers" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>Total unique viewers:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.totalUniqueViewers" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>Total followers gained:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.totalFollowersGained" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>Chat messages per stream:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.chatMessagesPerStream" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>Most-watched segment type:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week4.mostWatchedSegment" placeholder="e.g., gameplay, chat, events">
+        </div>
+        <div class="field-inline">
+          <label>YouTube Shorts total views:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.ytShortsViews" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>X impressions:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.xImpressions" placeholder="#">
+        </div>
+      </div>
+
+      <!-- Audience Validation -->
+      <div class="card-full">
+        <h3>Audience Validation</h3>
+
+        <div class="form-group">
+          <label class="form-label">Audience matches personas?</label>
+          <select data-field="checklist.week4.audienceMatchesPersonas">
+            <option value="">Select...</option>
+            <option value="Yes">Yes</option>
+            <option value="Partially">Partially</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What's different from expected?</label>
+          <textarea data-field="checklist.week4.whatsDifferent" placeholder="How does your actual audience differ?"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Adjustment needed</label>
+          <textarea data-field="checklist.week4.adjustmentNeeded" placeholder="What will you change to better match or serve this audience?"></textarea>
+        </div>
+      </div>
+
+      <!-- Month 2 Targets -->
+      <div class="card-full">
+        <h3>Month 2 Targets</h3>
+
+        <div class="field-inline">
+          <label>Month 2 follower target:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.m2FollowerTarget" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>Month 2 viewer target:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.m2ViewerTarget" placeholder="#">
+        </div>
+        <div class="field-inline">
+          <label>YouTube subscriber target:</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.m2YTSubTarget" placeholder="#">
+        </div>
+        <div class="form-group" style="margin-top: 0.75rem;">
+          <label class="form-label">Content changes planned</label>
+          <textarea data-field="checklist.week4.contentChanges" placeholder="What content shifts for month 2?"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">New tactic to try</label>
+          <textarea data-field="checklist.week4.newTactic" placeholder="One new experiment for next month..."></textarea>
+        </div>
+      </div>
+
+      <!-- Business & Financials -->
+      <div class="card-full">
+        <h3>Business &amp; Financials</h3>
+
+        <div class="form-group">
+          <label class="form-label">Business entity filed?</label>
+          <select data-field="checklist.week4.businessEntityFiled">
+            <option value="">Select...</option>
+            <option value="Yes">Yes</option>
+            <option value="Not yet">Not yet</option>
+          </select>
+        </div>
+        <div class="field-inline">
+          <label>Target date:</label>
+          <input type="text" class="input-inline input-md" data-field="checklist.week4.entityTargetDate" placeholder="MM/DD/YYYY">
+        </div>
+
+        <div class="field-inline" style="margin-top: 0.75rem;">
+          <label>Month 1 expenses: $</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.m1Expenses" placeholder="0.00">
+        </div>
+        <div class="field-inline">
+          <label>Month 1 revenue: $</label>
+          <input type="text" class="input-inline input-sm" data-field="checklist.week4.m1Revenue" placeholder="0.00">
+        </div>
+
+        <div class="form-group" style="margin-top: 0.75rem;">
+          <label class="form-label">On track with runway?</label>
+          <select data-field="checklist.week4.onTrackRunway">
+            <option value="">Select...</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Action if No</label>
+          <input type="text" data-field="checklist.week4.runwayAction" placeholder="What will you do to course-correct?">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       POST-CHECKLIST: What Happens Next
+       ============================================================ -->
+  <div class="accordion-item" data-section="checklist-post">
+    <button class="accordion-header">
+      <span>Post-Checklist: What Happens Next</span>
+      <span class="accordion-arrow">&#9660;</span>
+    </button>
+    <div class="accordion-body">
+
+      <div class="card-full">
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem;">
+          Congratulations on completing your 30-day quick-start! You now have a live channel, a growing community, and real data to guide your next moves. Here is where to go from here:
+        </p>
+
+        <div class="callout callout-info" style="margin-bottom: 1rem;">
+          <span class="callout-icon">&#9758;</span>
+          <div class="callout-text">
+            <strong>Refine Your Business Plan</strong>
+            Use your Month 1 metrics to update projections and strategy.
+            <a href="plan.html">Go to Business Plan &rarr;</a>
+          </div>
+        </div>
+
+        <div class="callout callout-success" style="margin-bottom: 1rem;">
+          <span class="callout-icon">&#9758;</span>
+          <div class="callout-text">
+            <strong>Deep Dive into Twitch Analytics</strong>
+            Analyze your stream data, understand viewer patterns, and optimize growth.
+            <a href="deep-dive.html">Go to Twitch Deep Dive &rarr;</a>
+          </div>
+        </div>
+
+        <div class="callout callout-warn" style="margin-bottom: 1rem;">
+          <span class="callout-icon">&#9758;</span>
+          <div class="callout-text">
+            <strong>Track Financials</strong>
+            Set up monthly budgets, revenue tracking, and financial projections.
+            <a href="financials.html">Go to Financials &rarr;</a>
+          </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-bottom: 1rem;">
+          <span class="callout-icon">&#9758;</span>
+          <div class="callout-text">
+            <strong>Use Content Templates</strong>
+            Streamline your weekly content creation with reusable templates.
+            <a href="templates.html">Go to Templates &rarr;</a>
+          </div>
+        </div>
+
+        <div class="callout callout-success" style="margin-bottom: 1rem;">
+          <span class="callout-icon">&#9758;</span>
+          <div class="callout-text">
+            <strong>Plan Your Calendar</strong>
+            Map out Month 2 streams, content drops, and milestones.
+            <a href="calendar.html">Go to Calendar &rarr;</a>
+          </div>
+        </div>
+
+        <div class="callout callout-info">
+          <span class="callout-icon">&#9758;</span>
+          <div class="callout-text">
+            <strong>Build Your Custom Plan</strong>
+            Combine everything into a personalized roadmap for the months ahead.
+            <a href="my-plan.html">Go to My Plan &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+<footer class="site-footer"><p>Influencer Planner &mdash; Your roadmap to 1M engaged users</p></footer>
+
+<script src="js/store.js"></script>
+<script src="js/autosave.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

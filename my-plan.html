@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Plan — Influencer Planner</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">INFLUENCER PLANNER</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Dashboard</a>
+    <a href="plan.html">Business Plan</a>
+    <a href="deep-dive.html">Twitch Deep Dive</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="templates.html">Templates</a>
+    <a href="financials.html">Financials</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="my-plan.html">My Plan</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>My Consolidated Plan</h1>
+  <p>Everything you've filled in across all sections, in one place</p>
+</div>
+
+<div class="container" style="padding-top:2rem;">
+
+  <!-- Action Buttons -->
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;justify-content:center;" class="no-print">
+    <button class="btn btn-primary" onclick="PDFExport.generate('plan-content','influencer-plan.pdf')">
+      Download PDF
+    </button>
+    <button class="btn btn-secondary" onclick="window.print()">
+      Print
+    </button>
+    <button class="btn btn-secondary" onclick="exportData()">
+      Export Data (JSON)
+    </button>
+    <label class="btn btn-secondary" style="cursor:pointer;">
+      Import Data
+      <input type="file" accept=".json" onchange="importData(event)" style="display:none;">
+    </label>
+    <button class="btn btn-danger" onclick="clearAllData()">
+      Clear All Data
+    </button>
+  </div>
+
+  <!-- Consolidated Plan Content -->
+  <div id="plan-content">
+    <div class="callout callout-info">
+      <div class="callout-icon">&#x23f3;</div>
+      <div class="callout-text">Loading your plan data...</div>
+    </div>
+  </div>
+
+  <!-- Last modified -->
+  <div style="text-align:center;margin-top:2rem;padding:1rem;color:var(--text-muted);font-size:0.8rem;" class="no-print">
+    <span id="last-modified"></span>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <p>Influencer Planner &mdash; Your roadmap to 1M engaged users</p>
+</footer>
+
+<!-- html2pdf.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+<script>window.html2pdf || document.write('<script src="lib/html2pdf.bundle.min.js"><\/script>')</script>
+<script src="js/store.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/pdf.js"></script>
+<script src="js/plan-view.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    PlanView.render();
+
+    const lm = Store.getLastModified();
+    if (lm) {
+      document.getElementById('last-modified').textContent = 'Last modified: ' + new Date(lm).toLocaleString();
+    }
+  });
+
+  function exportData() {
+    const json = Store.exportData();
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'influencer-planner-backup-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      if (confirm('This will replace all your current data. Are you sure?')) {
+        const ok = Store.importData(e.target.result);
+        if (ok) {
+          PlanView.render();
+          alert('Data imported successfully!');
+        } else {
+          alert('Import failed. Please check the file format.');
+        }
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function clearAllData() {
+    if (confirm('This will permanently delete ALL your saved data across all pages. This cannot be undone. Are you sure?')) {
+      if (confirm('Really sure? This deletes everything.')) {
+        Store.clear();
+        PlanView.render();
+      }
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twitch Platform Deep Dive — Influencer Planner</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/forms.css">
+<style>
+  /* Deep-dive page overrides — hero is specific to this page */
+  body { padding-top: 56px; }
+
+  .hero {
+    min-height: 70vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 5rem 2rem 4rem;
+    background: radial-gradient(ellipse at 50% 0%, rgba(145,70,255,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(255,107,157,0.08) 0%, transparent 50%),
+                var(--bg-primary);
+  }
+  .hero-content { max-width: 900px; }
+  .hero-badge {
+    display: inline-block; padding: 0.4rem 1rem; border-radius: 50px;
+    background: rgba(145,70,255,0.15); border: 1px solid rgba(145,70,255,0.3);
+    color: var(--purple-light); font-size: 0.8rem; font-weight: 600;
+    margin-bottom: 1.5rem; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto 2rem; }
+  .hero-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem; }
+  .hero-stat { text-align: center; }
+  .hero-stat .number {
+    font-size: 2.5rem; font-weight: 900;
+    background: var(--gradient-purple); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-stat .label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  section:nth-child(even) { background: var(--bg-secondary); }
+  section { padding: 5rem 0; }
+
+  .dd-nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; justify-content: center; }
+  .dd-nav-links a {
+    color: var(--text-muted); text-decoration: none; font-size: 0.75rem; font-weight: 500;
+    padding: 0.3rem 0.6rem; border-radius: 6px; transition: all 0.2s;
+    background: rgba(145,70,255,0.08); border: 1px solid rgba(145,70,255,0.15);
+  }
+  .dd-nav-links a:hover { color: var(--text-primary); background: var(--bg-card); }
+
+  footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--border); background: var(--bg-secondary); }
+  footer p { color: var(--text-muted); font-size: 0.8rem; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 4rem 1.5rem 3rem; min-height: auto; }
+    .hero h1 { font-size: 2rem; }
+    .hero-stats { gap: 1rem; }
+    .hero-stat .number { font-size: 1.8rem; }
+    section { padding: 3rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SITE-WIDE NAVIGATION ===== -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">INFLUENCER PLANNER</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Dashboard</a>
+    <a href="plan.html">Business Plan</a>
+    <a href="deep-dive.html">Twitch Deep Dive</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="templates.html">Templates</a>
+    <a href="financials.html">Financials</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="my-plan.html">My Plan</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Solopreneur's Complete Guide &bull; 2025-2026</div>
+    <h1>Twitch Platform Deep Dive</h1>
+    <p>Everything you need to know about monetization, growth, engagement, algorithms, and the path to 1M active users — backed by real statistics.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="number">240M</div><div class="label">Monthly Users</div></div>
+      <div class="hero-stat"><div class="number">8.3M</div><div class="label">Active Streamers</div></div>
+      <div class="hero-stat"><div class="number">$1.8B</div><div class="label">Platform Revenue</div></div>
+      <div class="hero-stat"><div class="number">67%</div><div class="label">Market Share</div></div>
+    </div>
+    <div class="dd-nav-links">
+      <a href="#tiers">Tiers</a>
+      <a href="#revenue">Revenue</a>
+      <a href="#features">Features</a>
+      <a href="#growth">Growth</a>
+      <a href="#content">Content</a>
+      <a href="#algorithm">Algorithm</a>
+      <a href="#restrictions">Rules</a>
+      <a href="#tactics">Tactics</a>
+      <a href="#benchmarks">Benchmarks</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== SECTION 1: HOW TWITCH WORKS ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 01</div>
+      <h2>How Twitch Works for Creators</h2>
+      <p>The basic revenue model explained visually</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Revenue Flow: Viewer to Creator</div>
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" style="max-width:900px">
+        <rect x="350" y="10" width="200" height="50" rx="25" fill="#9146ff" fill-opacity="0.2" stroke="#9146ff" stroke-width="2"/>
+        <text x="450" y="42" text-anchor="middle" fill="#bf94ff" font-family="Inter,sans-serif" font-weight="700" font-size="16">VIEWER</text>
+        <line x1="300" y1="60" x2="120" y2="110" stroke="#9146ff" stroke-width="1.5" stroke-dasharray="5,5"/>
+        <line x1="400" y1="60" x2="350" y2="110" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="5,5"/>
+        <line x1="500" y1="60" x2="550" y2="110" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="5,5"/>
+        <line x1="600" y1="60" x2="780" y2="110" stroke="#00ff7f" stroke-width="1.5" stroke-dasharray="5,5"/>
+        <rect x="30" y="110" width="180" height="45" rx="10" fill="#9146ff" fill-opacity="0.15" stroke="#9146ff" stroke-width="1.5"/>
+        <text x="120" y="138" text-anchor="middle" fill="#bf94ff" font-family="Inter,sans-serif" font-weight="600" font-size="13">Subscribes ($5.99-$24.99)</text>
+        <rect x="260" y="110" width="180" height="45" rx="10" fill="#ff6b9d" fill-opacity="0.15" stroke="#ff6b9d" stroke-width="1.5"/>
+        <text x="350" y="138" text-anchor="middle" fill="#ff6b9d" font-family="Inter,sans-serif" font-weight="600" font-size="13">Cheers with Bits</text>
+        <rect x="460" y="110" width="180" height="45" rx="10" fill="#00f0ff" fill-opacity="0.1" stroke="#00f0ff" stroke-width="1.5"/>
+        <text x="550" y="138" text-anchor="middle" fill="#00f0ff" font-family="Inter,sans-serif" font-weight="600" font-size="13">Watches Ads</text>
+        <rect x="690" y="110" width="180" height="45" rx="10" fill="#00ff7f" fill-opacity="0.1" stroke="#00ff7f" stroke-width="1.5"/>
+        <text x="780" y="138" text-anchor="middle" fill="#00ff7f" font-family="Inter,sans-serif" font-weight="600" font-size="13">Donates (3rd Party)</text>
+        <line x1="120" y1="155" x2="120" y2="195" stroke="#9146ff" stroke-width="1.5"/>
+        <rect x="40" y="195" width="160" height="35" rx="8" fill="rgba(255,68,68,0.1)" stroke="#ff4444" stroke-width="1"/>
+        <text x="120" y="217" text-anchor="middle" fill="#ff4444" font-family="Inter,sans-serif" font-weight="600" font-size="11">Twitch takes 30-50%</text>
+        <line x1="350" y1="155" x2="350" y2="195" stroke="#ff6b9d" stroke-width="1.5"/>
+        <rect x="270" y="195" width="160" height="35" rx="8" fill="rgba(0,255,127,0.1)" stroke="#00ff7f" stroke-width="1"/>
+        <text x="350" y="217" text-anchor="middle" fill="#00ff7f" font-family="Inter,sans-serif" font-weight="600" font-size="11">Twitch takes $0 *</text>
+        <line x1="550" y1="155" x2="550" y2="195" stroke="#00f0ff" stroke-width="1.5"/>
+        <rect x="470" y="195" width="160" height="35" rx="8" fill="rgba(255,68,68,0.1)" stroke="#ff4444" stroke-width="1"/>
+        <text x="550" y="217" text-anchor="middle" fill="#ff4444" font-family="Inter,sans-serif" font-weight="600" font-size="11">Twitch takes 45-50%</text>
+        <line x1="780" y1="155" x2="780" y2="195" stroke="#00ff7f" stroke-width="1.5"/>
+        <rect x="700" y="195" width="160" height="35" rx="8" fill="rgba(0,255,127,0.1)" stroke="#00ff7f" stroke-width="1"/>
+        <text x="780" y="217" text-anchor="middle" fill="#00ff7f" font-family="Inter,sans-serif" font-weight="600" font-size="11">Twitch takes $0</text>
+        <line x1="120" y1="230" x2="120" y2="265" stroke="#848494" stroke-width="1"/>
+        <line x1="350" y1="230" x2="350" y2="265" stroke="#848494" stroke-width="1"/>
+        <line x1="550" y1="230" x2="550" y2="265" stroke="#848494" stroke-width="1"/>
+        <line x1="780" y1="230" x2="780" y2="265" stroke="#848494" stroke-width="1"/>
+        <rect x="30" y="265" width="180" height="50" rx="12" fill="#9146ff" fill-opacity="0.25" stroke="#9146ff" stroke-width="2"/>
+        <text x="120" y="286" text-anchor="middle" fill="#bf94ff" font-family="Inter,sans-serif" font-weight="700" font-size="13">YOU GET</text>
+        <text x="120" y="305" text-anchor="middle" fill="#efeff1" font-family="Inter,sans-serif" font-weight="800" font-size="15">$3.00-$4.19/sub</text>
+        <rect x="260" y="265" width="180" height="50" rx="12" fill="#ff6b9d" fill-opacity="0.2" stroke="#ff6b9d" stroke-width="2"/>
+        <text x="350" y="286" text-anchor="middle" fill="#ff6b9d" font-family="Inter,sans-serif" font-weight="700" font-size="13">YOU GET</text>
+        <text x="350" y="305" text-anchor="middle" fill="#efeff1" font-family="Inter,sans-serif" font-weight="800" font-size="15">$0.01/Bit (100%)</text>
+        <rect x="460" y="265" width="180" height="50" rx="12" fill="#00f0ff" fill-opacity="0.15" stroke="#00f0ff" stroke-width="2"/>
+        <text x="550" y="286" text-anchor="middle" fill="#00f0ff" font-family="Inter,sans-serif" font-weight="700" font-size="13">YOU GET</text>
+        <text x="550" y="305" text-anchor="middle" fill="#efeff1" font-family="Inter,sans-serif" font-weight="800" font-size="15">~$1.75/1K views</text>
+        <rect x="690" y="265" width="180" height="50" rx="12" fill="#00ff7f" fill-opacity="0.15" stroke="#00ff7f" stroke-width="2"/>
+        <text x="780" y="286" text-anchor="middle" fill="#00ff7f" font-family="Inter,sans-serif" font-weight="700" font-size="13">YOU GET</text>
+        <text x="780" y="305" text-anchor="middle" fill="#efeff1" font-family="Inter,sans-serif" font-weight="800" font-size="15">~97%</text>
+        <text x="350" y="338" text-anchor="middle" fill="#848494" font-family="Inter,sans-serif" font-size="10">* Twitch takes ~40% when the viewer PURCHASES Bits, not when you receive them</text>
+      </svg>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">&#x1f4b0;</div>
+      <div class="callout-text">
+        <strong>Payout Terms</strong>
+        Minimum payout: $50 (lowered from $100 in 2024). Paid Net-15 (15 days after month-end). Methods: ACH, PayPal, wire transfer. Twitch issues 1099 for US creators earning $600+.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: TIERS ===== -->
+<section id="tiers">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 02</div>
+      <h2>Creator Tiers: Affiliate vs Partner</h2>
+      <p>Your progression path from zero to full monetization</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Creator Progression Path</div>
+      <div class="flow">
+        <div class="flow-node flow-purple" style="opacity:0.5">
+          <div style="font-size:0.7rem;opacity:0.7">STAGE 1</div>
+          New Streamer<br><span style="font-size:0.7rem;opacity:0.7">No revenue</span>
+        </div>
+        <div class="flow-arrow">&#x27A1;</div>
+        <div class="flow-node flow-pink">
+          <div style="font-size:0.7rem;opacity:0.7">STAGE 2 &bull; 2-8 weeks</div>
+          Affiliate<br><span style="font-size:0.7rem;opacity:0.7">50 followers, 3 CCV</span>
+        </div>
+        <div class="flow-arrow">&#x27A1;</div>
+        <div class="flow-node flow-cyan">
+          <div style="font-size:0.7rem;opacity:0.7">STAGE 3 &bull; 12-36 months</div>
+          Partner<br><span style="font-size:0.7rem;opacity:0.7">75 CCV, manual review</span>
+        </div>
+        <div class="flow-arrow">&#x27A1;</div>
+        <div class="flow-node flow-green">
+          <div style="font-size:0.7rem;opacity:0.7">STAGE 4 &bull; 300 subs &times; 3mo</div>
+          Plus Program<br><span style="font-size:0.7rem;opacity:0.7">70/30 revenue split</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card" style="border-top: 3px solid var(--pink);">
+        <h3>Affiliate Requirements</h3>
+        <p style="font-size:0.8rem; color:var(--pink); margin-bottom:0.75rem;">Achievable in 2-8 weeks</p>
+        <ul class="styled-list">
+          <li><strong>50</strong> Followers (all-time)</li>
+          <li><strong>3</strong> Avg Concurrent Viewers (30 days)</li>
+          <li><strong>8 hours</strong> Streamed (30 days)</li>
+          <li><strong>7</strong> Unique Broadcast Days (30 days)</li>
+        </ul>
+        <p style="font-size:0.8rem; margin-top:0.75rem; color:var(--text-muted);">Updated June 2025. Granted automatically when met.</p>
+      </div>
+      <div class="card" style="border-top: 3px solid var(--cyan);">
+        <h3>Partner Requirements</h3>
+        <p style="font-size:0.8rem; color:var(--cyan); margin-bottom:0.75rem;">Top 1% of streamers</p>
+        <ul class="styled-list">
+          <li><strong>75</strong> Avg Concurrent Viewers (30 days)</li>
+          <li><strong>25 hours</strong> Streamed (30 days)</li>
+          <li><strong>12</strong> Unique Broadcast Days (30 days)</li>
+        </ul>
+        <p style="font-size:0.8rem; margin-top:0.75rem; color:var(--text-muted);">Manual review. Not guaranteed. Raid CCV now counts.</p>
+      </div>
+    </div>
+
+    <div class="table-wrapper" style="margin-top:2rem">
+      <table>
+        <thead><tr><th>Feature</th><th>Affiliate</th><th>Partner</th></tr></thead>
+        <tbody>
+          <tr><td>Sub Revenue Split</td><td>50/50</td><td class="highlight-cell">Up to 70/30</td></tr>
+          <tr><td>Emote Slots</td><td>Limited (starts at 1)</td><td class="highlight-cell">60+</td></tr>
+          <tr><td>Transcoding (Quality Options)</td><td class="warn-cell">Not guaranteed</td><td class="highlight-cell">Always guaranteed</td></tr>
+          <tr><td>Verified Checkmark</td><td class="danger-cell">No</td><td class="highlight-cell">Yes</td></tr>
+          <tr><td>Custom Cheermotes</td><td class="danger-cell">No</td><td class="highlight-cell">Yes</td></tr>
+          <tr><td>Subscriber-Only Streams</td><td class="danger-cell">No</td><td class="highlight-cell">Yes</td></tr>
+          <tr><td>Priority Support</td><td class="danger-cell">No</td><td class="highlight-cell">Yes</td></tr>
+          <tr><td>Estimated Monthly (same audience)</td><td>~$3,000</td><td class="highlight-cell">~$7,000+</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-success" style="margin-top:1.5rem">
+      <div class="callout-icon">&#x1f451;</div>
+      <div class="callout-text">
+        <strong>Plus Program (70/30 Split)</strong>
+        Maintain 300 Plus Points for 3 consecutive months. Formula: (Tier 1 subs &times; 1) + (Tier 2 &times; 2) + (Tier 3 &times; 6). Gift subs and Prime subs EXCLUDED. Affiliates can now qualify. $100K cap removed.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: REVENUE ===== -->
+<section id="revenue">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 03</div>
+      <h2>All Ways to Earn Money</h2>
+      <p>Direct and indirect revenue streams, every dollar mapped</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Twitch Revenue Ecosystem — Mind Map</div>
+      <div class="mindmap">
+        <div style="text-align:center"><div class="mm-center">TWITCH REVENUE</div></div>
+        <div class="mm-branches">
+          <div class="mm-branch mm-b-purple">
+            <h4>Subscriptions</h4>
+            <ul>
+              <li>Tier 1: $5.99 &rarr; you get $3.00-$4.19</li>
+              <li>Tier 2: $9.99 &rarr; you get $5.00-$7.00</li>
+              <li>Tier 3: $24.99 &rarr; you get $12.50-$17.50</li>
+              <li>Prime Subs (free for Prime members)</li>
+              <li>Gift Subs (paid by other viewers)</li>
+            </ul>
+          </div>
+          <div class="mm-branch mm-b-pink">
+            <h4>Bits / Cheering</h4>
+            <ul>
+              <li>You get $0.01/Bit (100%)</li>
+              <li>100 Bits = $1.00 to you</li>
+              <li>Viewer pays ~$1.40 per 100</li>
+              <li>Twitch markup at purchase, not payout</li>
+              <li>Bits in Extensions: 80% to you</li>
+            </ul>
+          </div>
+          <div class="mm-branch mm-b-cyan">
+            <h4>Ad Revenue</h4>
+            <ul>
+              <li>~$3.50 CPM (gross)</li>
+              <li>~$1.75/1K views (standard 50/50)</li>
+              <li>~$1.93/1K views (AIP 55/45)</li>
+              <li>Pre-roll, Mid-roll, PiP formats</li>
+              <li>Q4 highest CPMs, Q1 lowest</li>
+            </ul>
+          </div>
+          <div class="mm-branch mm-b-green">
+            <h4>Third-Party Donations</h4>
+            <ul>
+              <li>StreamElements / Streamlabs</li>
+              <li>You keep ~97% (processor fees only)</li>
+              <li>Twitch takes $0</li>
+              <li>Ko-fi: 100% (free tier)</li>
+            </ul>
+          </div>
+          <div class="mm-branch mm-b-yellow">
+            <h4>Sponsorships</h4>
+            <ul>
+              <li>Micro (10-100 CCV): $50-$250/stream</li>
+              <li>Small (100-500): $250-$1K/stream</li>
+              <li>Mid (500-2K): $1K-$5K/stream</li>
+              <li>Large (2K-10K): $5K-$25K/stream</li>
+              <li>Top (10K+): $25K-$100K+/campaign</li>
+            </ul>
+          </div>
+          <div class="mm-branch mm-b-orange">
+            <h4>Other Streams</h4>
+            <ul>
+              <li>Merch (+32% with alerts enabled)</li>
+              <li>Affiliate marketing (5-15% commission)</li>
+              <li>Patreon / Memberships</li>
+              <li>Coaching ($20-$100+/hr)</li>
+              <li>Events & Appearances</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Complete Revenue Split Summary</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Source</th><th>You Get</th><th>Twitch Gets</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Subs (default)</td><td>50%</td><td>50%</td><td>All Affiliates + standard Partners</td></tr>
+            <tr><td>Subs (Plus Program)</td><td class="highlight-cell">70%</td><td>30%</td><td>300 Points &times; 3 months</td></tr>
+            <tr><td>Bits / Cheering</td><td class="highlight-cell">100%</td><td>0% at payout</td><td>Twitch takes ~40% at purchase</td></tr>
+            <tr><td>Bits in Extensions</td><td>80%</td><td>20% (to dev)</td><td>Extension-specific</td></tr>
+            <tr><td>Ads (standard)</td><td>50%</td><td>50%</td><td>~$1.75/1K views</td></tr>
+            <tr><td>Ads (AIP)</td><td>55%</td><td>45%</td><td>~$1.93/1K views</td></tr>
+            <tr><td>3rd-Party Donations</td><td class="highlight-cell">~97%</td><td>$0</td><td>Only processor fees</td></tr>
+            <tr><td>Sponsorships</td><td class="highlight-cell">100%</td><td>$0</td><td>You negotiate directly</td></tr>
+            <tr><td>Merch</td><td class="highlight-cell">60-90%</td><td>$0</td><td>Depends on merch platform</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">&#x1f4ca;</div>
+      <div class="callout-text">
+        <strong>Revenue at Scale Example</strong>
+        1,000 Tier 1 subs at 70/30 = <strong>$4,190/month</strong> from subs alone. Add Bits ($500), Ads ($300), Donations ($1,000), a mid-tier sponsor ($3,000), and merch ($800) = <strong>~$9,790/month</strong> at ~500 CCV.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: FEATURES ===== -->
+<section id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 04</div>
+      <h2>Twitch Features for Creators</h2>
+      <p>Every tool at your disposal, categorized by purpose</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">&#x1f680;</div>
+        <h3>Community & Growth</h3>
+        <ul class="styled-list">
+          <li><strong>Raids</strong> — Send viewers to another channel. CCV counts toward Partner.</li>
+          <li><strong>Stream Together</strong> — Multi-streamer broadcast with shared chat.</li>
+          <li><strong>Clips</strong> — Short highlights. Discovery engine for social sharing.</li>
+          <li><strong>VODs</strong> — Auto-saved streams. Partners: 60 days. Affiliates: 14 days.</li>
+          <li><strong>Highlights</strong> — Curated best-of. 100-hour storage cap.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#x1f525;</div>
+        <h3>Engagement</h3>
+        <ul class="styled-list">
+          <li><strong>Channel Points</strong> — Free virtual currency. Gamifies viewership.</li>
+          <li><strong>Predictions</strong> — Viewers wager points. Creates investment.</li>
+          <li><strong>Polls</strong> — ~45% participation rate. Quick engagement boost.</li>
+          <li><strong>Hype Train</strong> — Revenue amplifier via collective action.</li>
+          <li><strong>Emotes</strong> — Identity. Subs use them across ALL of Twitch.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#x1f4f1;</div>
+        <h3>Broadcast & Monetization</h3>
+        <ul class="styled-list">
+          <li><strong>Dual-Format (2025)</strong> — Simultaneous horizontal + vertical.</li>
+          <li><strong>Simulcasting</strong> — Now allowed (with restrictions).</li>
+          <li><strong>Merch Shelf</strong> — Integrated purchase on channel page.</li>
+          <li><strong>Extensions</strong> — Interactive overlays, mini-games, loyalty.</li>
+          <li><strong>Charity Tools</strong> — Built-in fundraising with badges.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: GROWTH ===== -->
+<section id="growth">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 05</div>
+      <h2>How Followers Grow</h2>
+      <p>Rates, patterns, and the harsh reality of Twitch growth</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Where You Stand: Twitch Streamer Distribution</div>
+      <div style="max-width:600px; margin:0 auto;">
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>0-5 Avg Viewers (95% of streamers)</span><span class="danger-cell">The Majority</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:95%;background:var(--red)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>6+ Avg Viewers (Top 6.7%)</span><span class="warn-cell">Standing Out</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:6.7%;background:var(--yellow)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>75+ Avg Viewers (Top 1%)</span><span class="highlight-cell">Partner Level</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:1%;background:var(--green)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>500+ Avg Viewers (Top 0.1%)</span><span style="color:var(--cyan)">Elite</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:0.5%;background:var(--cyan)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Realistic Growth Milestones</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Milestone</th><th>Full-Time</th><th>Part-Time (3-4 days/wk)</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Affiliate (50 followers, 3 CCV)</td><td class="highlight-cell">2-8 weeks</td><td>4-12 weeks</td><td>3 CCV is the hardest gate</td></tr>
+            <tr><td>1,000 followers</td><td>4-8 months</td><td>8-18 months</td><td></td></tr>
+            <tr><td>10,000 followers</td><td>12-24 months</td><td>24-48 months</td><td>Sponsorships become viable</td></tr>
+            <tr><td>Partner (75 CCV)</td><td class="warn-cell">12-36 months</td><td>24-60+ months</td><td>Top 1% of all streamers</td></tr>
+            <tr><td>100,000 followers</td><td>2-5 years</td><td class="danger-cell">Rare without virality</td><td>Requires cross-platform strategy</td></tr>
+            <tr><td>1,000,000+ followers</td><td>3-7+ years</td><td class="danger-cell">Exceptional only</td><td>Top 0.01%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">&#x26a0;&#xfe0f;</div>
+      <div class="callout-text">
+        <strong>The Growth Inflection Point: ~1,280 Followers</strong>
+        Below this: growth is slow and linear. Above this: doubling time decreases significantly. The mechanism: more followers &rarr; more viewers at stream start &rarr; higher category ranking &rarr; more organic discovery &rarr; faster growth.
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Follower-to-Revenue Conversion Rates</h3>
+      <div style="max-width:500px;">
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Followers who watch a given stream</span><span>2-10%</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:10%;background:var(--purple-primary)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Followers who watch monthly</span><span>10-30%</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:30%;background:var(--pink)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Follower-to-subscriber conversion</span><span>1-3%</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:3%;background:var(--cyan)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Subscriber-to-gifter conversion</span><span>5-15%</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:15%;background:var(--green)"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: CONTENT ===== -->
+<section id="content">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 06</div>
+      <h2>Content That Drives Engagement</h2>
+      <p>What to stream, when, and for how long — backed by data</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Twitch Content Landscape (2025)</div>
+      <div class="mm-branches" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+        <div class="mm-branch mm-b-purple">
+          <h4>Just Chatting &#x1f3c6;</h4>
+          <ul><li>#1 category</li><li>Non-gaming dominates</li><li>Lowest barrier to entry</li></ul>
+        </div>
+        <div class="mm-branch mm-b-pink">
+          <h4>IRL / Travel &#x1f4c8;</h4>
+          <ul><li>Nearly 3x growth YoY</li><li>Fastest-growing segment</li><li>High engagement</li></ul>
+        </div>
+        <div class="mm-branch mm-b-cyan">
+          <h4>Competitive Gaming</h4>
+          <ul><li>LoL, Valorant, Fortnite</li><li>High viewership</li><li>Extremely competitive</li></ul>
+        </div>
+        <div class="mm-branch mm-b-green">
+          <h4>Creative / Music</h4>
+          <ul><li>Growing niche</li><li>Unique audiences</li><li>Less competition</li></ul>
+        </div>
+        <div class="mm-branch mm-b-yellow">
+          <h4>Non-Gaming Total</h4>
+          <ul><li>32% of all watch time</li><li>Up from ~20% in 2022</li><li>Trend accelerating</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Optimal Stream Length</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Length</th><th>Effect on Growth</th><th>Best For</th></tr></thead>
+          <tbody>
+            <tr><td class="danger-cell">Under 2 hours</td><td>Too short for algorithm</td><td>Not recommended</td></tr>
+            <tr><td class="highlight-cell">2-4 hours</td><td>Optimal for new streamers</td><td>Sustainable, consistent quality</td></tr>
+            <tr><td>4-6 hours</td><td>Good for established</td><td>More ad revenue + engagement</td></tr>
+            <tr><td class="warn-cell">6-8 hours</td><td>Diminishing returns</td><td>Full-time only</td></tr>
+            <tr><td class="danger-cell">8+ hours</td><td>Burnout risk</td><td>Marathon / special events only</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout callout-success">
+      <div class="callout-icon">&#x1f4a1;</div>
+      <div class="callout-text">
+        <strong>Critical Algorithm Stat</strong>
+        Streams with <strong>45+ minute average viewer watch duration</strong> get <strong>3.2x more recommendations</strong>. The algorithm weights retention <strong>4x more than total views</strong>. Focus on keeping viewers, not just attracting them.
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Best Days &amp; Times to Stream</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Time Slot</th><th>Viewers</th><th>Competition</th><th>Best For</th></tr></thead>
+          <tbody>
+            <tr><td class="highlight-cell">Weekday 10AM-3PM</td><td>Moderate</td><td class="highlight-cell">47% less competition</td><td><strong>New / small streamers</strong></td></tr>
+            <tr><td>Weekday 6PM-11PM</td><td class="highlight-cell">Highest</td><td class="danger-cell">Highest</td><td>Established streamers</td></tr>
+            <tr><td>Weekend all day</td><td>Very high</td><td class="danger-cell">Very high</td><td>Everyone competes</td></tr>
+            <tr><td>Late night 12AM-6AM</td><td>Low (US)</td><td>Low</td><td>International audiences</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Engagement Boosters Ranked</h3>
+      <div style="max-width:550px;">
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Using viewer names</span><span style="color:var(--green)">Highest loyalty impact</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:95%;background:linear-gradient(90deg,var(--purple-primary),var(--green))"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Collaborations</span><span>2-5x normal chat</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:85%;background:linear-gradient(90deg,var(--purple-primary),var(--cyan))"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Viewer challenges</span><span>Very high</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:80%;background:linear-gradient(90deg,var(--purple-primary),var(--pink))"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Polls</span><span>~45% participation</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:70%;background:linear-gradient(90deg,var(--purple-primary),var(--yellow))"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Predictions (Channel Points)</span><span>High</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:65%;background:linear-gradient(90deg,var(--purple-primary),var(--orange))"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>Emote-only mode (brief)</span><span>~40% boost after lifting</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:55%;background:linear-gradient(90deg,var(--purple-primary),var(--pink))"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: ENGAGEMENT & RETENTION ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 07</div>
+      <h2>Engagement &amp; Retention Statistics</h2>
+      <p>The numbers that determine whether your community sticks</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3 style="color:var(--cyan)">Viewer Behavior</h3>
+        <ul class="styled-list">
+          <li>Average daily watch time: <strong>95-106 min</strong></li>
+          <li>Average session: <strong>68 minutes</strong></li>
+          <li>Lurkers (don't chat): <strong>50-80%</strong></li>
+          <li>Regular chatters: <strong>less than 5%</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--pink)">Subscriber Retention</h3>
+        <ul class="styled-list">
+          <li>Healthy monthly retention: <strong>70%+</strong></li>
+          <li>Average sub duration: <strong>3-6 months</strong></li>
+          <li>December gift sub spike: <strong>+15-20%</strong></li>
+          <li>Avg subs/channel dropped <strong>40%</strong> (2023&rarr;2024)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="diagram-container" style="margin-top:2rem;">
+      <div class="diagram-title">What Drives Retention (Ranked by Impact)</div>
+      <div style="max-width:550px; margin:0 auto;">
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>#1 Schedule Consistency</span><span style="color:var(--green)">68% of subs watch 80%+ of streams</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:100%;background:var(--green)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>#2 Personal Recognition</span><span>Names, past conversations</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:88%;background:var(--cyan)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>#3 Community Belonging</span><span>Discord, inside jokes</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:76%;background:var(--purple-primary)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>#4 Content Quality</span><span>Audio > video priority</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:64%;background:var(--pink)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>#5 Subscriber Value</span><span>Emotes, perks worth paying for</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:52%;background:var(--yellow)"></div></div>
+        </div>
+        <div class="metric-bar">
+          <div class="metric-bar-label"><span>#6 FOMO Content</span><span>Series, events, can't-miss moments</span></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:40%;background:var(--orange)"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 8: PLATFORM STATS ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 08</div>
+      <h2>Twitch Platform Statistics</h2>
+      <p>The big picture numbers (2025-2026)</p>
+    </div>
+
+    <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+      <div class="card" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--purple-light)">240M</div><div style="color:var(--text-muted);font-size:0.8rem;">Monthly Active Users</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--pink)">35M</div><div style="color:var(--text-muted);font-size:0.8rem;">Daily Active Users</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--cyan)">~2.5M</div><div style="color:var(--text-muted);font-size:0.8rem;">Avg Concurrent Viewers</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--green)">8.3M</div><div style="color:var(--text-muted);font-size:0.8rem;">Active Streamers</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--yellow)">67%</div><div style="color:var(--text-muted);font-size:0.8rem;">Gaming Livestream Market Share</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:2rem;font-weight:900;color:var(--orange)">$1.8B</div><div style="color:var(--text-muted);font-size:0.8rem;">Platform Revenue (2024)</div></div>
+    </div>
+
+    <div class="card-full" style="margin-top:2rem;">
+      <h3>Viewer Demographics</h3>
+      <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+        <div>
+          <p style="font-weight:700; margin-bottom:0.75rem;">Gender Split</p>
+          <div class="metric-bar"><div class="metric-bar-label"><span>Male</span><span>65%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:65%;background:var(--purple-primary)"></div></div></div>
+          <div class="metric-bar"><div class="metric-bar-label"><span>Female</span><span>35%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:35%;background:var(--pink)"></div></div></div>
+        </div>
+        <div>
+          <p style="font-weight:700; margin-bottom:0.75rem;">Age Distribution</p>
+          <div class="metric-bar"><div class="metric-bar-label"><span>16-24</span><span>41%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:41%;background:var(--cyan)"></div></div></div>
+          <div class="metric-bar"><div class="metric-bar-label"><span>25-34</span><span>31%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:31%;background:var(--green)"></div></div></div>
+          <div class="metric-bar"><div class="metric-bar-label"><span>35-44</span><span>16%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:16%;background:var(--yellow)"></div></div></div>
+          <div class="metric-bar"><div class="metric-bar-label"><span>45+</span><span>12%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:12%;background:var(--orange)"></div></div></div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;font-size:0.85rem;color:var(--text-muted);">Average viewer age: ~26. 72% of viewers are under 34. Top market: US (23%), Germany (7%), South Korea (5%).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 9: ALGORITHM ===== -->
+<section id="algorithm">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 09</div>
+      <h2>Discovery &amp; Algorithm</h2>
+      <p>How viewers find you — and how to game the system ethically</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Twitch Algorithm Signals (2025) — Weighted by Importance</div>
+      <div style="max-width:600px; margin:0 auto;">
+        <div class="metric-bar"><div class="metric-bar-label"><span>&#x1f3af; Viewer Retention</span><span class="highlight-cell">HIGHEST (4x weight)</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:100%;background:linear-gradient(90deg,var(--green),var(--cyan))"></div></div></div>
+        <div class="metric-bar"><div class="metric-bar-label"><span>&#x1f4ac; Chat Activity Rate</span><span>Very High</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:82%;background:linear-gradient(90deg,var(--purple-primary),var(--pink))"></div></div></div>
+        <div class="metric-bar"><div class="metric-bar-label"><span>&#x1f4ce; Follow-to-View Ratio</span><span>High</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:70%;background:var(--cyan)"></div></div></div>
+        <div class="metric-bar"><div class="metric-bar-label"><span>&#x2702;&#xfe0f; Clip Creation Rate</span><span style="color:var(--yellow)">High (new 2025)</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:65%;background:var(--yellow)"></div></div></div>
+        <div class="metric-bar"><div class="metric-bar-label"><span>&#x1f3ae; Category Ranking</span><span>Medium</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:50%;background:var(--orange)"></div></div></div>
+        <div class="metric-bar"><div class="metric-bar-label"><span>&#x1f4c5; Stream Consistency</span><span>Medium</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:45%;background:var(--pink)"></div></div></div>
+        <div class="metric-bar"><div class="metric-bar-label"><span>&#x1f465; Follower Count</span><span style="color:var(--text-muted)">Lower than before</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:25%;background:var(--text-muted)"></div></div></div>
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-icon">&#x23f1;&#xfe0f;</div>
+      <div class="callout-text">
+        <strong>15-Second Rule</strong>
+        If a viewer leaves within 15 seconds, your ranking drops immediately. Your opening moments must hook instantly. No long intros, no "waiting for people to join," no dead air.
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Category Strategy: Critical for Small Streamers</h3>
+      <p style="color:var(--text-secondary); margin-bottom:1rem;">The #1 mistake: streaming in overcrowded categories where you're invisible. Being 15th in a niche category >> being 5,000th in Fortnite.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Category Size</th><th>Total Viewers</th><th>CCV to Be Visible</th><th>Recommendation</th></tr></thead>
+          <tbody>
+            <tr><td>Mega (Fortnite, LoL)</td><td>100K+</td><td>1,000+</td><td class="danger-cell">Avoid until large</td></tr>
+            <tr><td>Large (Valorant, GTA V)</td><td>20K-100K</td><td>200+</td><td class="warn-cell">Risky for small</td></tr>
+            <tr><td>Mid (specific games)</td><td>2K-20K</td><td>20-50</td><td>Good starting point</td></tr>
+            <tr><td class="highlight-cell">Small / Niche</td><td>200-2K</td><td class="highlight-cell">5-15 to be top 10</td><td class="highlight-cell">BEST for new streamers</td></tr>
+            <tr><td>Micro</td><td>Under 200</td><td>3-5 to dominate</td><td>Good for dedicated niche</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">&#x1f50d;</div>
+      <div class="callout-text">
+        <strong>3-5 Impressions Rule</strong>
+        The average viewer needs to encounter you 3-5 times across different platforms before following. This is why cross-platform content (clips on X, Shorts on YouTube) is essential — Twitch organic discovery alone is not enough for small streamers.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 10: RESTRICTIONS ===== -->
+<section id="restrictions">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 10</div>
+      <h2>Content Restrictions &amp; Limitations</h2>
+      <p>What you can and cannot do — critical compliance knowledge</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card" style="border-top:3px solid var(--red);">
+        <h3 style="color:var(--red)">Banned Activities</h3>
+        <ul class="styled-list">
+          <li>Unlicensed casino streaming (Stake, Rollbit, etc.)</li>
+          <li>Nudity, pornography, sexual services</li>
+          <li>Consuming / selling illegal drugs</li>
+          <li>MLM / pyramid scheme promotion</li>
+          <li>Selling account access / boosting</li>
+          <li>Hate speech / harassment (zero tolerance)</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:3px solid var(--green);">
+        <h3 style="color:var(--green)">Allowed Commercial Activities</h3>
+        <ul class="styled-list">
+          <li>Merch via merch shelf &mdash; <span class="tag tag-green">allowed</span></li>
+          <li>External store links &mdash; <span class="tag tag-green">allowed</span></li>
+          <li>Sponsored content &mdash; <span class="tag tag-yellow">must use Branded Content tool</span></li>
+          <li>Affiliate links &mdash; <span class="tag tag-yellow">must disclose per FTC</span></li>
+          <li>Direct sales pitches &mdash; <span class="tag tag-yellow">cannot be primary purpose</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-danger" style="margin-top:1.5rem;">
+      <div class="callout-icon">&#x2696;&#xfe0f;</div>
+      <div class="callout-text">
+        <strong>FTC Disclosure: Non-Negotiable</strong>
+        Persistent on-screen disclosure ("#ad" or "#sponsored" overlay) required during ALL sponsored content. "Thanks to [brand]" at the start of the stream alone is NOT sufficient. Fines up to <strong>$50,000+ per violation</strong>.
+      </div>
+    </div>
+
+    <div class="card-full" style="margin-top:1.5rem;">
+      <h3>Simulcasting Rules (Updated 2025)</h3>
+      <div class="compare-grid">
+        <div class="compare-col compare-do">
+          <h3>Allowed</h3>
+          <ul>
+            <li>Simulcast to YouTube, Kick, etc.</li>
+            <li>Both Affiliates and Partners</li>
+            <li>Link to other channels in About section</li>
+            <li>Maintain Twitch quality equal or better</li>
+          </ul>
+        </div>
+        <div class="compare-col compare-dont">
+          <h3>Prohibited</h3>
+          <ul>
+            <li>Merging chats from multiple platforms</li>
+            <li>Directing viewers to leave Twitch</li>
+            <li>Lower quality on Twitch than elsewhere</li>
+            <li>Violating signed exclusivity agreements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 11: TACTICS ===== -->
+<section id="tactics">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 11</div>
+      <h2>Growth Tactics That Actually Work</h2>
+      <p>And the mistakes that will kill your channel</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Growth Tactics by Stage</div>
+      <div class="mindmap">
+        <div class="mm-branches" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="mm-branch mm-b-purple">
+            <h4>Tier 1: Foundation</h4>
+            <ul>
+              <li>Consistent schedule (same time, every time)</li>
+              <li>Interact with EVERY chatter</li>
+              <li>Raid 2-3 streamers after each stream</li>
+              <li>Post clips on X/YouTube/TikTok daily</li>
+              <li>Stream in right category (top 10-20)</li>
+              <li>Engage in other communities genuinely</li>
+            </ul>
+          </div>
+          <div class="mm-branch mm-b-cyan">
+            <h4>Tier 2: Acceleration (100+ CCV)</h4>
+            <ul>
+              <li>Collab with 2-5x sized streamers</li>
+              <li>Weekly YouTube long-form content</li>
+              <li>Build daily-active Discord</li>
+              <li>Run community events weekly</li>
+              <li>A/B test titles and thumbnails</li>
+            </ul>
+          </div>
+          <div class="mm-branch mm-b-green">
+            <h4>Tier 3: Scale (500+ CCV)</h4>
+            <ul>
+              <li>Cross-platform content engine</li>
+              <li>Active brand deal pursuit</li>
+              <li>Launch merchandise</li>
+              <li>Attend conventions</li>
+              <li>Build a team (3-5 people)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-grid" style="margin-top:2rem;">
+      <div class="compare-col compare-do">
+        <h3>What Works</h3>
+        <ul>
+          <li>Consistent schedule (68% of subs watch 80%+ of streams)</li>
+          <li>Authentic personality (audiences detect fakes fast)</li>
+          <li>Cross-platform clips (3-5 impressions before follow)</li>
+          <li>Niche category selection (be visible, not invisible)</li>
+          <li>Genuine networking (raid, collab, participate)</li>
+          <li>Audio quality priority (viewers leave for bad audio)</li>
+          <li>Community building (Discord, inside jokes, recognition)</li>
+        </ul>
+      </div>
+      <div class="compare-col compare-dont">
+        <h3>What Kills Growth</h3>
+        <ul>
+          <li>Follow-for-follow (dead followers hurt algorithm)</li>
+          <li>Buying followers/viewers (bannable, destroys ranking)</li>
+          <li>8+ hours daily from day 1 (unsustainable burnout)</li>
+          <li>Only streaming, no cross-platform content</li>
+          <li>Switching games/content constantly</li>
+          <li>Begging for follows/subs (repels high-value viewers)</li>
+          <li>Giveaway-only growth (attracts freebie hunters)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 12: BENCHMARKS ===== -->
+<section id="benchmarks" data-section="deepDive-benchmarks">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Section 12</div>
+      <h2>Solopreneur Planning Benchmarks</h2>
+      <p>Revenue targets, timelines, and the realistic path to 1M users</p>
+    </div>
+
+    <div class="card-full">
+      <h3>Revenue Benchmarks by Stage</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Stage</th><th>CCV</th><th>Followers</th><th>Monthly Revenue</th></tr></thead>
+          <tbody>
+            <tr><td>Pre-Affiliate</td><td>0-3</td><td>0-50</td><td class="danger-cell">$0</td></tr>
+            <tr><td>New Affiliate</td><td>3-10</td><td>50-500</td><td>$50-$300</td></tr>
+            <tr><td>Growing Affiliate</td><td>10-50</td><td>500-5K</td><td>$300-$2,000</td></tr>
+            <tr><td>Strong Affiliate</td><td>50-100</td><td>5K-20K</td><td class="warn-cell">$2,000-$5,000</td></tr>
+            <tr><td>New Partner</td><td>75-200</td><td>20K-50K</td><td>$5,000-$15,000</td></tr>
+            <tr><td>Established Partner</td><td>200-1K</td><td>50K-200K</td><td class="highlight-cell">$15,000-$50,000</td></tr>
+            <tr><td>Top Partner</td><td>1K-10K</td><td>200K-1M</td><td class="highlight-cell">$50,000-$200,000+</td></tr>
+            <tr><td>Elite</td><td>10K+</td><td>1M+</td><td style="color:var(--cyan);font-weight:700">$200,000+/mo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card-full">
+      <h3>Month-by-Month Growth Targets</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color:var(--purple-primary)"></div>
+          <div class="timeline-meta">MONTH 1</div>
+          <h4>3-5 CCV &bull; 50-100 Followers</h4>
+          <p>Establish schedule. Achieve Affiliate status. Test and refine setup.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color:var(--pink)"></div>
+          <div class="timeline-meta">MONTH 3</div>
+          <h4>10-20 CCV &bull; 300-600 Followers</h4>
+          <p>Start YouTube content. First collaborations. Schedule is locked in.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color:var(--cyan)"></div>
+          <div class="timeline-meta">MONTH 6</div>
+          <h4>20-50 CCV &bull; 1K-3K Followers</h4>
+          <p>Regular YouTube uploads. Discord community growing. Content pillars defined.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color:var(--green)"></div>
+          <div class="timeline-meta">MONTH 12</div>
+          <h4>75-150 CCV &bull; 8K-20K Followers</h4>
+          <p>Apply for Partner. Active sponsor outreach. First meaningful revenue.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color:var(--yellow)"></div>
+          <div class="timeline-meta">MONTH 18</div>
+          <h4>150-500 CCV &bull; 20K-50K Followers</h4>
+          <p>Team building begins (editor, social manager). Brand deals growing.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color:var(--orange)"></div>
+          <div class="timeline-meta">MONTH 24</div>
+          <h4>500-1,500 CCV &bull; 50K-150K Followers</h4>
+          <p>Multi-platform content engine. Diversified revenue. You're a business now.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color:var(--red)"></div>
+          <div class="timeline-meta">MONTH 36</div>
+          <h4>1,500-5,000 CCV &bull; 150K-500K Followers</h4>
+          <p>Established brand. Full team. Premium sponsorships. Path to 1M clear.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-title">Path to 1M Engaged Users (Cross-Platform)</div>
+      <div class="mm-branches" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+        <div class="mm-branch mm-b-purple"><h4>Twitch</h4><ul><li>200K-500K followers</li><li>5K-20K CCV</li></ul></div>
+        <div class="mm-branch mm-b-pink"><h4>YouTube</h4><ul><li>300K-700K subs</li><li>Primary discovery engine</li></ul></div>
+        <div class="mm-branch mm-b-cyan"><h4>X (Twitter)</h4><ul><li>100K-300K followers</li><li>Personality + clips</li></ul></div>
+        <div class="mm-branch mm-b-green"><h4>Discord</h4><ul><li>20K-50K members</li><li>Owned audience</li></ul></div>
+        <div class="mm-branch mm-b-yellow"><h4>Facebook</h4><ul><li>50K-200K followers</li><li>Older, higher income</li></ul></div>
+        <div class="mm-branch mm-b-orange"><h4>Tumblr</h4><ul><li>20K-50K followers</li><li>Niche community</li></ul></div>
+      </div>
+      <div style="text-align:center; margin-top:1.5rem;">
+        <div style="display:inline-block; padding:0.75rem 2rem; border-radius:50px; background:var(--gradient-hero); font-weight:800; font-size:1.1rem;">
+          = 1,000,000 Engaged Users &bull; $50K-$200K+/month &bull; 3-7 Years
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">&#x26a0;&#xfe0f;</div>
+      <div class="callout-text">
+        <strong>Reality Check</strong>
+        These are top 5% targets. The difference-maker is a <strong>cross-platform content strategy</strong> — you cannot reach 1M engaged users on Twitch alone. YouTube is your discovery engine, X is your personality amplifier, Discord is your owned audience, and Twitch is where the community lives.
+      </div>
+    </div>
+
+    <!-- Fillable Key Metrics -->
+    <div class="card-full" style="margin-top:2rem;">
+      <h3>Key Conversion Metrics to Track</h3>
+      <span class="save-indicator"></span>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Metric</th><th>Industry Benchmark</th><th>Your Target</th></tr></thead>
+          <tbody>
+            <tr><td>Follower-to-viewer ratio</td><td>2-10%</td><td><input type="text" data-field="deepDive.targets.followerToViewer" placeholder="____%" style="width:80px"></td></tr>
+            <tr><td>Viewer-to-subscriber</td><td>1-3% of followers</td><td><input type="text" data-field="deepDive.targets.viewerToSub" placeholder="____%" style="width:80px"></td></tr>
+            <tr><td>Subscriber retention (monthly)</td><td>70%+</td><td><input type="text" data-field="deepDive.targets.subRetention" placeholder="____%" style="width:80px"></td></tr>
+            <tr><td>Chat participation rate</td><td>20-50% of viewers</td><td><input type="text" data-field="deepDive.targets.chatParticipation" placeholder="____%" style="width:80px"></td></tr>
+            <tr><td>Return viewer rate (7 days)</td><td>25-35%</td><td><input type="text" data-field="deepDive.targets.returnViewer" placeholder="____%" style="width:80px"></td></tr>
+            <tr><td>YouTube-to-Twitch funnel</td><td>2-5%</td><td><input type="text" data-field="deepDive.targets.ytToTwitch" placeholder="____%" style="width:80px"></td></tr>
+            <tr><td>Merch conversion rate</td><td>1-3% of audience</td><td><input type="text" data-field="deepDive.targets.merchConversion" placeholder="____%" style="width:80px"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOURCES ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">Sources</div>
+      <h2>Research Sources</h2>
+    </div>
+    <div class="card-full" style="font-size:0.85rem; color:var(--text-secondary);">
+      <p>Twitch Creator Documentation (help.twitch.tv) &bull; Twitch Blog (blog.twitch.tv) &bull; TwitchTracker &bull; SullyGnome &bull; StreamScheme &bull; TechCrunch &bull; Engadget &bull; Backlinko &bull; StreamElements State of the Stream Reports &bull; Tubefilter &bull; Restream &bull; PC Gamer</p>
+      <p style="margin-top:0.75rem; color:var(--text-muted); font-size:0.8rem;">Note: Some metrics represent industry benchmarks and community consensus where official data is not publicly disclosed by Twitch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <p style="font-size:0.9rem; margin-bottom:0.5rem;">
+    <span class="gradient-text" style="font-weight:700;">Twitch Platform Deep Dive</span> &bull; Solopreneur's Complete Guide
+  </p>
+  <p>Influencer Planner &mdash; Your roadmap to 1M engaged users</p>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/autosave.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

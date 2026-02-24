@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sponsor Outreach Templates — Influencer Planner</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/forms.css">
+<style>
+  /* Template-specific styles */
+  .template-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .template-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--purple-light);
+    padding-right: 120px;
+  }
+  .template-card .copy-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+  .template-text {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+  }
+  .template-text .tpl-label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .template-text input[type="text"] {
+    display: inline-block;
+    width: auto;
+    min-width: 120px;
+    max-width: 280px;
+    background: rgba(145,70,255,0.08);
+    border: 1px solid rgba(145,70,255,0.25);
+    border-radius: 4px;
+    padding: 0.15rem 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    vertical-align: baseline;
+    line-height: 1.5;
+  }
+  .template-text input[type="text"]:focus {
+    border-color: var(--purple-primary);
+    background: rgba(145,70,255,0.12);
+    box-shadow: 0 0 0 2px rgba(145,70,255,0.15);
+    outline: none;
+  }
+  .template-text input[type="text"]::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.8rem;
+  }
+
+  /* Rate card table inputs */
+  .rate-card-table input[type="text"] {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+    width: 100%;
+    color: var(--text-primary);
+  }
+  .rate-card-table input:focus {
+    border-color: var(--purple-primary);
+    background: var(--bg-primary);
+  }
+  .rate-card-table input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  /* Media kit structure */
+  .media-kit-page {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .media-kit-page h4 {
+    color: var(--cyan);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Deliverables sections */
+  .deliverables-section {
+    margin-bottom: 1.5rem;
+  }
+  .deliverables-section h4 {
+    color: var(--purple-light);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Report metrics */
+  .report-section {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .report-section h4 {
+    color: var(--cyan);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .metric-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .metric-row label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    min-width: 200px;
+    white-space: nowrap;
+  }
+  .metric-row input {
+    flex: 1;
+    max-width: 200px;
+  }
+
+  /* Pricing formula */
+  .formula-block {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+  .formula-block strong {
+    color: var(--purple-light);
+  }
+  .formula-block input[type="text"] {
+    display: inline-block;
+    width: auto;
+    min-width: 80px;
+    max-width: 160px;
+    background: rgba(145,70,255,0.08);
+    border: 1px solid rgba(145,70,255,0.25);
+    border-radius: 4px;
+    padding: 0.15rem 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    vertical-align: baseline;
+  }
+  .formula-block input:focus {
+    border-color: var(--purple-primary);
+    background: rgba(145,70,255,0.12);
+    outline: none;
+  }
+  .formula-block input::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.8rem;
+  }
+
+  /* Quick reference section */
+  .quick-reference {
+    margin-top: 3rem;
+  }
+  .quick-reference h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .template-card h3 { padding-right: 0; }
+    .template-card .copy-btn {
+      position: static;
+      margin-bottom: 1rem;
+      display: block;
+      width: fit-content;
+    }
+    .metric-row { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+    .metric-row label { min-width: auto; }
+    .metric-row input { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">INFLUENCER PLANNER</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Dashboard</a>
+    <a href="plan.html">Business Plan</a>
+    <a href="deep-dive.html">Twitch Deep Dive</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="templates.html">Templates</a>
+    <a href="financials.html">Financials</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="my-plan.html">My Plan</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>Sponsor Outreach Templates</h1>
+  <p>Professional templates for brand outreach, media kits, rate cards, and campaign reporting</p>
+  <div style="margin-top: 0.75rem;">
+    <span class="save-indicator">Saved</span>
+  </div>
+</header>
+
+<main class="container" style="padding-bottom: 2rem;">
+
+<!-- ===== TABS ===== -->
+<div class="tabs" data-tabs="templates">
+  <button class="tab-btn active" data-tab="cold-outreach">Cold Outreach</button>
+  <button class="tab-btn" data-tab="follow-up">Follow-Up Sequences</button>
+  <button class="tab-btn" data-tab="media-kit">Media Kit Structure</button>
+  <button class="tab-btn" data-tab="rate-card">Rate Card</button>
+  <button class="tab-btn" data-tab="deliverables">Deliverables Menu</button>
+  <button class="tab-btn" data-tab="post-campaign">Post-Campaign Report</button>
+</div>
+
+<!-- ============================== -->
+<!-- TAB 1: COLD OUTREACH           -->
+<!-- ============================== -->
+<div class="tab-panel active" data-tabs="templates" data-tab="cold-outreach" data-section="templates-cold-outreach">
+
+  <!-- Template A: Small/Mid Brand -->
+  <div class="template-card">
+    <h3>Template A: First Contact (Small/Mid Brand)</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">Subject: <input type="text" data-field="templates.coldOutreachA.yourBrand" placeholder="Your Brand"> x <input type="text" data-field="templates.coldOutreachA.theirBrand" placeholder="Their Brand"> &mdash; <input type="text" data-field="templates.coldOutreachA.viewerCount" placeholder="X">K engaged viewers, <input type="text" data-field="templates.coldOutreachA.demographicMatch" placeholder="demographic match">
+
+Hi <input type="text" data-field="templates.coldOutreachA.firstName" placeholder="First Name">,
+
+I'm <input type="text" data-field="templates.coldOutreachA.yourName" placeholder="Your Name">, a <input type="text" data-field="templates.coldOutreachA.contentVertical" placeholder="content vertical"> creator on Twitch with <input type="text" data-field="templates.coldOutreachA.avgViewers" placeholder="X"> average concurrent viewers and a cross-platform community of <input type="text" data-field="templates.coldOutreachA.totalCommunity" placeholder="X"> across Twitch, YouTube, X, and Discord.
+
+I've been a genuine fan of <input type="text" data-field="templates.coldOutreachA.theirProduct" placeholder="Their Product"> &mdash; <input type="text" data-field="templates.coldOutreachA.personalConnection" placeholder="1 sentence about personal use/connection">.
+
+Three reasons <input type="text" data-field="templates.coldOutreachA.theirBrandReason" placeholder="Their Brand"> resonates with my audience:
+1. <input type="text" data-field="templates.coldOutreachA.reason1" placeholder='e.g., "82% of my audience is male, 25-34, in tech"'>
+2. <input type="text" data-field="templates.coldOutreachA.reason2" placeholder='e.g., "My community actively discusses [relevant topic]"'>
+3. <input type="text" data-field="templates.coldOutreachA.reason3" placeholder='e.g., "Average donation is $15, indicating strong disposable income"'>
+
+I'd love to explore a <input type="text" data-field="templates.coldOutreachA.specificFormat" placeholder="specific format">: <input type="text" data-field="templates.coldOutreachA.formatDetail" placeholder='e.g., "dedicated 2-hour stream featuring your product"'>.
+
+My media kit is attached with full audience demographics and past partnership results.
+
+Would you be open to a 15-minute call this week?
+
+Best,
+<input type="text" data-field="templates.coldOutreachA.signName" placeholder="Your Name">
+<input type="text" data-field="templates.coldOutreachA.twitchLink" placeholder="Twitch"> | <input type="text" data-field="templates.coldOutreachA.youtubeLink" placeholder="YouTube"> | <input type="text" data-field="templates.coldOutreachA.xLink" placeholder="X"> | <input type="text" data-field="templates.coldOutreachA.websiteLink" placeholder="Website"></div>
+  </div>
+
+  <!-- Template B: Enterprise -->
+  <div class="template-card">
+    <h3>Template B: First Contact (Large/Enterprise Brand)</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">Subject: Partnership Proposal: <input type="text" data-field="templates.coldOutreachB.yourBrand" placeholder="Your Brand"> &mdash; <input type="text" data-field="templates.coldOutreachB.monthlyAudience" placeholder="X">K monthly active audience, <input type="text" data-field="templates.coldOutreachB.incomeBracket" placeholder="income bracket"> demographic
+
+Dear <input type="text" data-field="templates.coldOutreachB.recipientName" placeholder="Name / Marketing Team">,
+
+I'm reaching out because <input type="text" data-field="templates.coldOutreachB.theirBrand" placeholder="Their Brand">'s values around <input type="text" data-field="templates.coldOutreachB.specificValue" placeholder="specific value/mission"> align directly with my community of <input type="text" data-field="templates.coldOutreachB.communitySize" placeholder="X"> highly engaged viewers.
+
+Quick snapshot:
+- Platform: Twitch (primary), YouTube, X, Facebook, Tumblr
+- Avg concurrent viewers: <input type="text" data-field="templates.coldOutreachB.avgViewers" placeholder="X">
+- Monthly unique viewers: <input type="text" data-field="templates.coldOutreachB.monthlyUnique" placeholder="X">
+- Audience: <input type="text" data-field="templates.coldOutreachB.ageRange" placeholder="age range">, <input type="text" data-field="templates.coldOutreachB.genderSplit" placeholder="gender split">, <input type="text" data-field="templates.coldOutreachB.incomeBracketDetail" placeholder="income bracket">, <input type="text" data-field="templates.coldOutreachB.topOccupations" placeholder="top occupations">
+- Engagement rate: <input type="text" data-field="templates.coldOutreachB.engagementRate" placeholder="X">% (platform average is ~<input type="text" data-field="templates.coldOutreachB.platformAvg" placeholder="Y">%)
+- Past sponsors: <input type="text" data-field="templates.coldOutreachB.pastSponsor1" placeholder="Brand 1">, <input type="text" data-field="templates.coldOutreachB.pastSponsor2" placeholder="Brand 2">, <input type="text" data-field="templates.coldOutreachB.pastSponsor3" placeholder="Brand 3">
+
+What I can offer:
+- Dedicated sponsored streams with authentic product integration
+- Cross-platform amplification (YouTube highlight, X thread, Discord community discussion)
+- Audience that actively purchases &mdash; <input type="text" data-field="templates.coldOutreachB.merchConversion" placeholder="X">% merch conversion, avg transaction $<input type="text" data-field="templates.coldOutreachB.avgTransaction" placeholder="X">
+
+I've attached my full media kit. I'd welcome the opportunity to discuss how we can create something valuable for both <input type="text" data-field="templates.coldOutreachB.theirBrandClose" placeholder="Their Brand"> and my community.
+
+Available for a call at your convenience.
+
+Regards,
+<input type="text" data-field="templates.coldOutreachB.signName" placeholder="Your Name">
+<input type="text" data-field="templates.coldOutreachB.contactInfo" placeholder="Full contact info and social links"></div>
+  </div>
+
+  <!-- Template C: Warm Outreach -->
+  <div class="template-card">
+    <h3>Template C: Warm Outreach (After Existing Relationship)</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">Subject: Re: <input type="text" data-field="templates.coldOutreachC.previousContext" placeholder="Previous interaction context"> &mdash; partnership idea
+
+Hi <input type="text" data-field="templates.coldOutreachC.firstName" placeholder="First Name">,
+
+Great connecting at <input type="text" data-field="templates.coldOutreachC.connectionContext" placeholder="event / in chat / on X">. Following up on our conversation about <input type="text" data-field="templates.coldOutreachC.topic" placeholder="topic">.
+
+I put together a specific idea for how <input type="text" data-field="templates.coldOutreachC.theirBrand" placeholder="Their Brand"> could reach my audience of <input type="text" data-field="templates.coldOutreachC.audienceSize" placeholder="X"> engaged viewers:
+
+<input type="text" data-field="templates.coldOutreachC.campaignPitch" placeholder="1-2 sentence pitch of specific campaign concept">
+
+The format would be:
+- <input type="text" data-field="templates.coldOutreachC.deliverable1" placeholder="Deliverable 1">
+- <input type="text" data-field="templates.coldOutreachC.deliverable2" placeholder="Deliverable 2">
+- <input type="text" data-field="templates.coldOutreachC.deliverable3" placeholder="Deliverable 3">
+
+Timeline: <input type="text" data-field="templates.coldOutreachC.timeline" placeholder="proposed dates">
+Investment: <input type="text" data-field="templates.coldOutreachC.investment" placeholder='price range or "happy to discuss"'>
+
+Media kit attached. Want to hop on a quick call?
+
+<input type="text" data-field="templates.coldOutreachC.signName" placeholder="Your Name"></div>
+  </div>
+
+</div>
+
+<!-- ============================== -->
+<!-- TAB 2: FOLLOW-UP SEQUENCES     -->
+<!-- ============================== -->
+<div class="tab-panel" data-tabs="templates" data-tab="follow-up" data-section="templates-follow-up">
+
+  <!-- Follow-Up 1 -->
+  <div class="template-card">
+    <h3>Follow-Up 1 (5 Business Days After Initial Email)</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">Subject: Re: <input type="text" data-field="templates.followUp1.originalSubject" placeholder="Original subject line">
+
+Hi <input type="text" data-field="templates.followUp1.name" placeholder="Name">,
+
+Following up on my partnership proposal from <input type="text" data-field="templates.followUp1.date" placeholder="date">. I know inboxes get busy.
+
+Quick reminder: I'm <input type="text" data-field="templates.followUp1.yourName" placeholder="Your Name">, <input type="text" data-field="templates.followUp1.contentVertical" placeholder="content vertical"> creator with <input type="text" data-field="templates.followUp1.avgViewers" placeholder="X"> avg viewers and a <input type="text" data-field="templates.followUp1.demographic" placeholder="demographic"> audience that aligns well with <input type="text" data-field="templates.followUp1.theirBrand" placeholder="Their Brand">.
+
+Happy to send a quick 1-page summary if the full media kit was too much to review.
+
+Best,
+<input type="text" data-field="templates.followUp1.signName" placeholder="Your Name"></div>
+  </div>
+
+  <!-- Follow-Up 2 -->
+  <div class="template-card">
+    <h3>Follow-Up 2 (10 Business Days After Initial Email)</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">Subject: Re: <input type="text" data-field="templates.followUp2.originalSubject" placeholder="Original subject line"> &mdash; timing update
+
+Hi <input type="text" data-field="templates.followUp2.name" placeholder="Name">,
+
+Last follow-up &mdash; I'm finalizing my sponsorship calendar for <input type="text" data-field="templates.followUp2.monthQuarter" placeholder="month/quarter"> and wanted to check if <input type="text" data-field="templates.followUp2.theirBrand" placeholder="Their Brand"> has interest before I fill the remaining slots.
+
+No worries if the timing isn't right. I'd love to keep <input type="text" data-field="templates.followUp2.theirBrandClose" placeholder="Their Brand"> on my radar for future opportunities.
+
+<input type="text" data-field="templates.followUp2.signName" placeholder="Your Name"></div>
+  </div>
+
+  <!-- After No / No Response -->
+  <div class="template-card">
+    <h3>After a "No" or No Response (30 Days Later)</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">Subject: No pitch &mdash; just sharing results
+
+Hi <input type="text" data-field="templates.followUp3.name" placeholder="Name">,
+
+Not pitching anything today. Just wanted to share that my community hit <input type="text" data-field="templates.followUp3.milestone" placeholder="milestone"> this month, and my audience demographics have shifted to <input type="text" data-field="templates.followUp3.improvement" placeholder="relevant improvement for their brand">.
+
+Thought it might be relevant for future planning on your end. Always happy to chat if the timing works out.
+
+<input type="text" data-field="templates.followUp3.signName" placeholder="Your Name"></div>
+  </div>
+
+</div>
+
+<!-- ============================== -->
+<!-- TAB 3: MEDIA KIT STRUCTURE     -->
+<!-- ============================== -->
+<div class="tab-panel" data-tabs="templates" data-tab="media-kit" data-section="templates-media-kit">
+
+  <div class="callout callout-info" style="margin-bottom: 1.5rem;">
+    <div class="callout-icon">&#9432;</div>
+    <div class="callout-text">
+      <strong>Your media kit should be a 1-3 page PDF (clean, professional design).</strong>
+      Fill in the fields below to draft your content, then design it in your preferred tool.
+    </div>
+  </div>
+
+  <!-- Page 1: Who You Are -->
+  <div class="template-card">
+    <h3>Page 1: Who You Are</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text"><input type="text" data-field="templates.mediaKit.brandName" placeholder="BRAND NAME" style="min-width:200px;font-size:1rem;">
+<input type="text" data-field="templates.mediaKit.tagline" placeholder="Tagline" style="min-width:250px;">
+
+ABOUT
+<input type="text" data-field="templates.mediaKit.bio" placeholder="2-3 sentence bio -- who you are, what you do, why it matters" style="min-width:100%;max-width:100%;">
+
+PLATFORMS
+- Twitch: @<input type="text" data-field="templates.mediaKit.twitchHandle" placeholder="handle"> &mdash; <input type="text" data-field="templates.mediaKit.twitchFollowers" placeholder="X"> followers, <input type="text" data-field="templates.mediaKit.twitchAvgViewers" placeholder="X"> avg concurrent viewers
+- YouTube: @<input type="text" data-field="templates.mediaKit.youtubeHandle" placeholder="handle"> &mdash; <input type="text" data-field="templates.mediaKit.youtubeSubs" placeholder="X"> subscribers, <input type="text" data-field="templates.mediaKit.youtubeMonthlyViews" placeholder="X"> avg monthly views
+- X: @<input type="text" data-field="templates.mediaKit.xHandle" placeholder="handle"> &mdash; <input type="text" data-field="templates.mediaKit.xFollowers" placeholder="X"> followers, <input type="text" data-field="templates.mediaKit.xImpressions" placeholder="X"> avg impressions/month
+- Facebook: <input type="text" data-field="templates.mediaKit.facebookPage" placeholder="page name"> &mdash; <input type="text" data-field="templates.mediaKit.facebookFollowers" placeholder="X"> followers
+- Tumblr: @<input type="text" data-field="templates.mediaKit.tumblrHandle" placeholder="handle"> &mdash; <input type="text" data-field="templates.mediaKit.tumblrFollowers" placeholder="X"> followers
+- Discord: <input type="text" data-field="templates.mediaKit.discordMembers" placeholder="X"> members
+
+TOTAL CROSS-PLATFORM REACH: <input type="text" data-field="templates.mediaKit.totalReach" placeholder="X"></div>
+  </div>
+
+  <!-- Page 2: Audience Demographics -->
+  <div class="template-card">
+    <h3>Page 2: Audience Demographics</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">AUDIENCE SNAPSHOT
+
+Age Distribution:
+- 18-24: <input type="text" data-field="templates.mediaKit.age1824" placeholder="___%">
+- 25-34: <input type="text" data-field="templates.mediaKit.age2534" placeholder="___%">
+- 35-44: <input type="text" data-field="templates.mediaKit.age3544" placeholder="___%">
+- 45+:   <input type="text" data-field="templates.mediaKit.age45plus" placeholder="___%">
+
+Gender: <input type="text" data-field="templates.mediaKit.genderMale" placeholder="___">% Male | <input type="text" data-field="templates.mediaKit.genderFemale" placeholder="___">% Female | <input type="text" data-field="templates.mediaKit.genderOther" placeholder="___">% Other
+
+Top Geographies:
+1. <input type="text" data-field="templates.mediaKit.geo1" placeholder="City/Country"> &mdash; <input type="text" data-field="templates.mediaKit.geo1pct" placeholder="___">%
+2. <input type="text" data-field="templates.mediaKit.geo2" placeholder="City/Country"> &mdash; <input type="text" data-field="templates.mediaKit.geo2pct" placeholder="___">%
+3. <input type="text" data-field="templates.mediaKit.geo3" placeholder="City/Country"> &mdash; <input type="text" data-field="templates.mediaKit.geo3pct" placeholder="___">%
+
+Income Brackets (from audience survey):
+- Under $50K:    <input type="text" data-field="templates.mediaKit.income50k" placeholder="___%">
+- $50K-$100K:    <input type="text" data-field="templates.mediaKit.income100k" placeholder="___%">
+- $100K-$150K:   <input type="text" data-field="templates.mediaKit.income150k" placeholder="___%">
+- $150K+:        <input type="text" data-field="templates.mediaKit.income150kPlus" placeholder="___%">
+
+Top Occupations: <input type="text" data-field="templates.mediaKit.topOccupations" placeholder="list 3-5" style="min-width:250px;">
+
+ENGAGEMENT METRICS
+- Twitch chat rate: <input type="text" data-field="templates.mediaKit.chatRate" placeholder="X"> messages/min (platform avg: ~2-5)
+- Twitch sub conversion: <input type="text" data-field="templates.mediaKit.subConversion" placeholder="X">% of viewers are subscribers
+- YouTube avg view duration: <input type="text" data-field="templates.mediaKit.ytViewDuration" placeholder="X"> min (<input type="text" data-field="templates.mediaKit.ytRetention" placeholder="X">% retention)
+- X engagement rate: <input type="text" data-field="templates.mediaKit.xEngagement" placeholder="X">% (platform avg: ~1-3%)
+- Average donation amount: $<input type="text" data-field="templates.mediaKit.avgDonation" placeholder="X">
+- Merch conversion rate: <input type="text" data-field="templates.mediaKit.merchRate" placeholder="X">%</div>
+  </div>
+
+  <!-- Page 3: Partnership Options -->
+  <div class="template-card">
+    <h3>Page 3: Partnership Options &amp; Past Work</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">PARTNERSHIP OPTIONS
+[See Rate Card tab for full pricing]
+
+PAST PARTNERSHIPS
+- <input type="text" data-field="templates.mediaKit.pastBrand1" placeholder="Brand 1">: <input type="text" data-field="templates.mediaKit.pastFormat1" placeholder="Format"> &mdash; <input type="text" data-field="templates.mediaKit.pastResult1" placeholder="Key result/metric">
+- <input type="text" data-field="templates.mediaKit.pastBrand2" placeholder="Brand 2">: <input type="text" data-field="templates.mediaKit.pastFormat2" placeholder="Format"> &mdash; <input type="text" data-field="templates.mediaKit.pastResult2" placeholder="Key result/metric">
+- <input type="text" data-field="templates.mediaKit.pastBrand3" placeholder="Brand 3">: <input type="text" data-field="templates.mediaKit.pastFormat3" placeholder="Format"> &mdash; <input type="text" data-field="templates.mediaKit.pastResult3" placeholder="Key result/metric">
+
+TESTIMONIALS
+"<input type="text" data-field="templates.mediaKit.testimonialQuote" placeholder="Quote from past sponsor" style="min-width:300px;max-width:100%;">"
+&mdash; <input type="text" data-field="templates.mediaKit.testimonialAuthor" placeholder="Name, Title, Brand">
+
+CONTACT
+<input type="text" data-field="templates.mediaKit.contactName" placeholder="Your Name">
+<input type="text" data-field="templates.mediaKit.contactEmail" placeholder="Email">
+<input type="text" data-field="templates.mediaKit.contactPhone" placeholder="Phone (optional)">
+<input type="text" data-field="templates.mediaKit.contactWebsite" placeholder="Website">
+<input type="text" data-field="templates.mediaKit.contactSocials" placeholder="All social links"></div>
+  </div>
+
+</div>
+
+<!-- ============================== -->
+<!-- TAB 4: RATE CARD               -->
+<!-- ============================== -->
+<div class="tab-panel" data-tabs="templates" data-tab="rate-card" data-section="templates-rate-card">
+
+  <div class="callout callout-warn" style="margin-bottom: 1.5rem;">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-text">
+      <strong>Never share your rate card proactively.</strong>
+      Use it as your internal reference during negotiations. Update as your audience grows.
+    </div>
+  </div>
+
+  <div class="template-card">
+    <h3>Current Rate Card</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text" style="padding: 0; background: transparent; border: none; font-family: inherit;">
+      <div class="table-wrapper rate-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Deliverable</th>
+              <th>Description</th>
+              <th>Rate</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dedicated Stream</td>
+              <td>Full stream focused on sponsor product/brand</td>
+              <td><input type="text" data-field="templates.rateCard.dedicatedStreamRate" placeholder="$/hr"></td>
+              <td><input type="text" data-field="templates.rateCard.dedicatedStreamNotes" placeholder="Min 2hrs"></td>
+            </tr>
+            <tr>
+              <td>Stream Integration</td>
+              <td>Organic mention + gameplay/use during regular stream</td>
+              <td><input type="text" data-field="templates.rateCard.streamIntegrationRate" placeholder="$/segment"></td>
+              <td><input type="text" data-field="templates.rateCard.streamIntegrationNotes" placeholder="15-30 min segment"></td>
+            </tr>
+            <tr>
+              <td>Pre-Roll Shoutout</td>
+              <td>Opening sponsor mention with visual</td>
+              <td><input type="text" data-field="templates.rateCard.preRollRate" placeholder="$/stream"></td>
+              <td><input type="text" data-field="templates.rateCard.preRollNotes" placeholder="30-60 seconds"></td>
+            </tr>
+            <tr>
+              <td>YouTube Dedicated Video</td>
+              <td>Full video about sponsor product</td>
+              <td><input type="text" data-field="templates.rateCard.ytDedicatedRate" placeholder="$"></td>
+              <td><input type="text" data-field="templates.rateCard.ytDedicatedNotes" placeholder="Min X views guaranteed"></td>
+            </tr>
+            <tr>
+              <td>YouTube Integration</td>
+              <td>Sponsor mention in regular video</td>
+              <td><input type="text" data-field="templates.rateCard.ytIntegrationRate" placeholder="$/video"></td>
+              <td><input type="text" data-field="templates.rateCard.ytIntegrationNotes" placeholder="60-90 second segment"></td>
+            </tr>
+            <tr>
+              <td>YouTube Shorts</td>
+              <td>Dedicated short featuring product</td>
+              <td><input type="text" data-field="templates.rateCard.ytShortsRate" placeholder="$/short"></td>
+              <td><input type="text" data-field="templates.rateCard.ytShortsNotes" placeholder=""></td>
+            </tr>
+            <tr>
+              <td>X Thread</td>
+              <td>Multi-tweet thread about sponsor</td>
+              <td><input type="text" data-field="templates.rateCard.xThreadRate" placeholder="$/thread"></td>
+              <td><input type="text" data-field="templates.rateCard.xThreadNotes" placeholder=""></td>
+            </tr>
+            <tr>
+              <td>X Single Post</td>
+              <td>Single tweet with media</td>
+              <td><input type="text" data-field="templates.rateCard.xPostRate" placeholder="$/post"></td>
+              <td><input type="text" data-field="templates.rateCard.xPostNotes" placeholder=""></td>
+            </tr>
+            <tr>
+              <td>Social Media Bundle</td>
+              <td>Posts across all platforms</td>
+              <td><input type="text" data-field="templates.rateCard.socialBundleRate" placeholder="$/bundle"></td>
+              <td><input type="text" data-field="templates.rateCard.socialBundleNotes" placeholder="Define deliverables"></td>
+            </tr>
+            <tr>
+              <td>Discord Giveaway</td>
+              <td>Sponsor-provided giveaway in Discord</td>
+              <td><input type="text" data-field="templates.rateCard.discordGiveawayRate" placeholder="$/event"></td>
+              <td><input type="text" data-field="templates.rateCard.discordGiveawayNotes" placeholder=""></td>
+            </tr>
+            <tr>
+              <td>Full Campaign (1 week)</td>
+              <td>Stream + YouTube + Social + Discord</td>
+              <td><input type="text" data-field="templates.rateCard.fullWeekRate" placeholder="$/week"></td>
+              <td><input type="text" data-field="templates.rateCard.fullWeekNotes" placeholder="Custom proposal"></td>
+            </tr>
+            <tr>
+              <td>Full Campaign (1 month)</td>
+              <td>Multiple touchpoints over 30 days</td>
+              <td><input type="text" data-field="templates.rateCard.fullMonthRate" placeholder="$/month"></td>
+              <td><input type="text" data-field="templates.rateCard.fullMonthNotes" placeholder="Custom proposal"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Formula -->
+  <div class="template-card">
+    <h3>Pricing Formula Reference</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">
+      <div class="formula-block">
+<strong>Base Rate Calculation:</strong>
+
+<strong>CPM Method:</strong> (Avg viewers x stream hours x 1000) x $<input type="text" data-field="templates.rateCard.cpmRate" placeholder="your CPM rate">
+<strong>Flat Rate Method:</strong> $<input type="text" data-field="templates.rateCard.hourlyRate" placeholder="hourly rate"> x hours of content
+<strong>Value Method:</strong> Estimated impressions x conversion estimate x product value
+
+Your minimum acceptable rate: $<input type="text" data-field="templates.rateCard.minRate" placeholder="___">/hour of content created
+Your aspirational rate: $<input type="text" data-field="templates.rateCard.aspirationalRate" placeholder="___">/hour of content created
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================== -->
+<!-- TAB 5: DELIVERABLES MENU       -->
+<!-- ============================== -->
+<div class="tab-panel" data-tabs="templates" data-tab="deliverables" data-section="templates-deliverables">
+
+  <div class="callout callout-info" style="margin-bottom: 1.5rem;">
+    <div class="callout-icon">&#128161;</div>
+    <div class="callout-text">
+      <strong>When negotiating, offer a menu of add-ons to increase deal size.</strong>
+      Check off the deliverables you currently offer or plan to offer.
+    </div>
+  </div>
+
+  <!-- Core Deliverables -->
+  <div class="card-full">
+    <h3>Core Deliverables</h3>
+    <div class="deliverables-section">
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.liveStreamMention">
+        <label>Live stream mention/integration</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.dedicatedStream">
+        <label>Dedicated sponsored stream</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.productReview">
+        <label>Product review/unboxing on stream</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.tutorial">
+        <label>Tutorial/how-to using sponsor product</label>
+      </label>
+    </div>
+  </div>
+
+  <!-- Amplification Add-Ons -->
+  <div class="card-full">
+    <h3>Amplification Add-Ons</h3>
+    <div class="deliverables-section">
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.ytHighlight">
+        <label>YouTube highlight video featuring sponsor segment</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.ytShort">
+        <label>YouTube Short / clip</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.xPosts">
+        <label>X post(s) with media</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.facebookPost">
+        <label>Facebook post</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.tumblrPost">
+        <label>Tumblr post</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.discordAnnouncement">
+        <label>Discord announcement + discussion thread</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.newsletterMention">
+        <label>Email newsletter mention (when list is built)</label>
+      </label>
+    </div>
+  </div>
+
+  <!-- Premium Add-Ons -->
+  <div class="card-full">
+    <h3>Premium Add-Ons</h3>
+    <div class="deliverables-section">
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.customOverlay">
+        <label>Custom overlay/branding during sponsored stream</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.giveawayEvent">
+        <label>Giveaway event (sponsor provides prizes)</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.viewerChallenge">
+        <label>Viewer challenge/contest featuring product</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.subExclusive">
+        <label>Subscriber-only exclusive content with sponsor</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.multiWeekSeries">
+        <label>Multi-week series (recurring integration)</label>
+      </label>
+    </div>
+  </div>
+
+  <!-- Usage Rights -->
+  <div class="card-full">
+    <h3>Usage Rights (Charge Extra)</h3>
+    <div class="deliverables-section">
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.contentUsageRights">
+        <label>Content usage rights for sponsor's own channels</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.testimonialRights">
+        <label>Testimonial usage rights</label>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" data-field="templates.deliverables.extendedLicensing">
+        <label>Extended licensing (6mo / 1yr / perpetual)</label>
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================== -->
+<!-- TAB 6: POST-CAMPAIGN REPORT    -->
+<!-- ============================== -->
+<div class="tab-panel" data-tabs="templates" data-tab="post-campaign" data-section="templates-post-campaign">
+
+  <div class="callout callout-success" style="margin-bottom: 1.5rem;">
+    <div class="callout-icon">&#9733;</div>
+    <div class="callout-text">
+      <strong>Send this within 7 days of campaign completion.</strong>
+      This is how you get REPEAT sponsors. A post-campaign report sets you apart from 90% of creators.
+    </div>
+  </div>
+
+  <div class="template-card">
+    <h3>Post-Campaign Report</h3>
+    <button class="btn btn-secondary btn-sm copy-btn">Copy to Clipboard</button>
+    <div class="template-text">POST-CAMPAIGN REPORT
+<input type="text" data-field="templates.postCampaign.yourBrand" placeholder="Your Brand"> x <input type="text" data-field="templates.postCampaign.sponsorBrand" placeholder="Sponsor Brand">
+Campaign Period: <input type="text" data-field="templates.postCampaign.startDate" placeholder="Start Date"> &mdash; <input type="text" data-field="templates.postCampaign.endDate" placeholder="End Date">
+
+EXECUTIVE SUMMARY
+<input type="text" data-field="templates.postCampaign.execSummary" placeholder="2-3 sentences: what was delivered, top-line results" style="min-width:100%;max-width:100%;">
+
+DELIVERABLES COMPLETED
+&#10003; <input type="text" data-field="templates.postCampaign.deliverable1" placeholder="Deliverable 1"> &mdash; <input type="text" data-field="templates.postCampaign.deliverable1date" placeholder="date"> &mdash; <input type="text" data-field="templates.postCampaign.deliverable1link" placeholder="link">
+&#10003; <input type="text" data-field="templates.postCampaign.deliverable2" placeholder="Deliverable 2"> &mdash; <input type="text" data-field="templates.postCampaign.deliverable2date" placeholder="date"> &mdash; <input type="text" data-field="templates.postCampaign.deliverable2link" placeholder="link">
+&#10003; <input type="text" data-field="templates.postCampaign.deliverable3" placeholder="Deliverable 3"> &mdash; <input type="text" data-field="templates.postCampaign.deliverable3date" placeholder="date"> &mdash; <input type="text" data-field="templates.postCampaign.deliverable3link" placeholder="link">
+
+PERFORMANCE METRICS
+
+Twitch Stream:
+- Peak concurrent viewers: <input type="text" data-field="templates.postCampaign.twitchPeak" placeholder="___">
+- Average concurrent viewers: <input type="text" data-field="templates.postCampaign.twitchAvg" placeholder="___">
+- Total unique viewers: <input type="text" data-field="templates.postCampaign.twitchUnique" placeholder="___">
+- Stream duration: <input type="text" data-field="templates.postCampaign.twitchDuration" placeholder="___">hrs
+- Chat mentions of sponsor/product: <input type="text" data-field="templates.postCampaign.twitchChatMentions" placeholder="___">
+- Clicks on sponsor link (if tracked): <input type="text" data-field="templates.postCampaign.twitchClicks" placeholder="___">
+
+YouTube (if applicable):
+- Total views: <input type="text" data-field="templates.postCampaign.ytViews" placeholder="___">
+- Average view duration: <input type="text" data-field="templates.postCampaign.ytAvgDuration" placeholder="___">
+- Click-through rate: <input type="text" data-field="templates.postCampaign.ytCTR" placeholder="___">%
+- Comments mentioning sponsor: <input type="text" data-field="templates.postCampaign.ytComments" placeholder="___">
+
+Social Media:
+- X impressions: <input type="text" data-field="templates.postCampaign.xImpressions" placeholder="___">
+- X engagements: <input type="text" data-field="templates.postCampaign.xEngagements" placeholder="___">
+- Facebook reach: <input type="text" data-field="templates.postCampaign.fbReach" placeholder="___">
+- Other platform metrics: <input type="text" data-field="templates.postCampaign.otherMetrics" placeholder="___">
+
+AUDIENCE SENTIMENT
+<input type="text" data-field="templates.postCampaign.sentiment" placeholder="Summary of chat/comment sentiment" style="min-width:100%;max-width:100%;">
+
+Notable positive reactions:
+1. <input type="text" data-field="templates.postCampaign.reaction1" placeholder="Notable comment/reaction" style="min-width:300px;">
+2. <input type="text" data-field="templates.postCampaign.reaction2" placeholder="Notable comment/reaction" style="min-width:300px;">
+3. <input type="text" data-field="templates.postCampaign.reaction3" placeholder="Notable comment/reaction" style="min-width:300px;">
+
+TOTAL ESTIMATED IMPRESSIONS: <input type="text" data-field="templates.postCampaign.totalImpressions" placeholder="___">
+EFFECTIVE CPM: $<input type="text" data-field="templates.postCampaign.effectiveCPM" placeholder="___">
+
+RECOMMENDATIONS FOR FUTURE PARTNERSHIP
+<input type="text" data-field="templates.postCampaign.recommendations" placeholder="1-2 suggestions for what would work even better next time" style="min-width:100%;max-width:100%;">
+
+Thank you for partnering with <input type="text" data-field="templates.postCampaign.yourBrandClose" placeholder="Your Brand">. Looking forward to our next collaboration.
+
+<input type="text" data-field="templates.postCampaign.signName" placeholder="Your Name">
+<input type="text" data-field="templates.postCampaign.contactInfo" placeholder="Contact info"></div>
+  </div>
+
+</div>
+
+<!-- ============================== -->
+<!-- QUICK REFERENCE (outside tabs) -->
+<!-- ============================== -->
+<section class="quick-reference">
+  <div class="section-header">
+    <div class="section-number">Quick Reference</div>
+    <h2>Outreach Do's and Don'ts</h2>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-col compare-do">
+      <h3>Do</h3>
+      <ul>
+        <li>Research the brand contact's name (LinkedIn, company website)</li>
+        <li>Reference specific products you genuinely use/like</li>
+        <li>Include hard numbers (viewers, demographics, engagement rates)</li>
+        <li>Follow up exactly twice, then move on</li>
+        <li>Negotiate &mdash; first offer is rarely final</li>
+        <li>Send post-campaign reports (this alone sets you apart from 90% of creators)</li>
+      </ul>
+    </div>
+    <div class="compare-col compare-dont">
+      <h3>Don't</h3>
+      <ul>
+        <li>Send generic mass emails (personalize every one)</li>
+        <li>Undersell yourself (know your CPM benchmarks)</li>
+        <li>Accept product-only deals once you have 1K+ avg viewers</li>
+        <li>Agree to exclusivity without premium pricing</li>
+        <li>Skip FTC disclosures (non-negotiable, legally required)</li>
+        <li>Burn bridges &mdash; a "no" today is a "yes" at 10x your audience size</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Influencer Planner &mdash; Your roadmap to 1M engaged users</p>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/autosave.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/copy-button.js"></script>
+</body>
+</html>

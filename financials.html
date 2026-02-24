@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Projections — Influencer Planner</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/forms.css">
+<style>
+  .financial-table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    max-height: 80vh;
+    position: relative;
+  }
+  .financial-table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .financial-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-secondary);
+  }
+  .financial-table th {
+    text-align: center;
+    padding: 0.6rem 0.5rem;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--purple-light);
+    border-bottom: 2px solid var(--purple-primary);
+    white-space: nowrap;
+    background: var(--bg-secondary);
+    min-width: 90px;
+  }
+  .financial-table th:nth-child(1) { min-width: 55px; }
+  .financial-table th:nth-child(2) { min-width: 90px; }
+  .financial-table td {
+    padding: 0.3rem 0.35rem;
+    border-bottom: 1px solid rgba(47,47,53,0.4);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .financial-table tr:hover td { background: rgba(145,70,255,0.03); }
+
+  /* Phase border colors */
+  .phase-foundation td:first-child { border-left: 3px solid var(--purple-primary); }
+  .phase-traction td:first-child { border-left: 3px solid var(--pink); }
+  .phase-acceleration td:first-child { border-left: 3px solid var(--cyan); }
+  .phase-scale td:first-child { border-left: 3px solid var(--green); }
+
+  .financial-table td.month-cell,
+  .financial-table td.phase-cell {
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+  }
+  .financial-table td.phase-cell { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .financial-table input[type="number"] {
+    width: 85px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .financial-table input[type="number"]:focus {
+    border-color: var(--purple-primary);
+    background: var(--bg-primary);
+    outline: none;
+  }
+  .financial-table input[type="text"] {
+    width: 120px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+  }
+  .financial-table input[type="text"]:focus {
+    border-color: var(--purple-primary);
+    background: var(--bg-primary);
+    outline: none;
+  }
+
+  .calc-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .calc-cell.highlight-cell { color: var(--green); }
+  .calc-cell.danger-cell { color: var(--red); }
+
+  /* Revenue columns subtle green header */
+  .financial-table th.col-revenue { color: var(--green); }
+  .financial-table th.col-expense { color: var(--red); }
+  .financial-table th.col-total { color: var(--yellow); }
+
+  /* Annual summary */
+  .annual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .annual-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .annual-card h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .annual-card .annual-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(47,47,53,0.3);
+  }
+  .annual-card .annual-row:last-child { border-bottom: none; }
+  .annual-card .annual-row .label { color: var(--text-secondary); }
+  .annual-card .annual-row .value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+
+  .year1-card h3 { color: var(--purple-light); }
+  .year2-card h3 { color: var(--pink); }
+  .year3-card h3 { color: var(--cyan); }
+
+  /* Benchmarks */
+  .benchmarks-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  .benchmarks-card h3 {
+    color: var(--yellow);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .benchmark-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(47,47,53,0.3);
+    font-size: 0.85rem;
+  }
+  .benchmark-item:last-child { border-bottom: none; }
+  .benchmark-label { color: var(--text-secondary); min-width: 200px; }
+  .benchmark-formula {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--cyan);
+    font-size: 0.8rem;
+  }
+
+  /* Year target inputs */
+  .year-targets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .year-target-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .year-target-item label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+  .year-target-item .input-money-wrap { flex: 1; }
+
+  @media (max-width: 768px) {
+    .financial-table input[type="number"] { width: 70px; }
+    .financial-table input[type="text"] { width: 90px; }
+    .benchmark-item { flex-direction: column; gap: 0.25rem; }
+    .benchmark-label { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">INFLUENCER PLANNER</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Dashboard</a>
+    <a href="plan.html">Business Plan</a>
+    <a href="deep-dive.html">Twitch Deep Dive</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="templates.html">Templates</a>
+    <a href="financials.html">Financials</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="my-plan.html">My Plan</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>Financial Projections</h1>
+  <p>36-month revenue and expense tracking</p>
+  <span class="save-indicator">Saved</span>
+</header>
+
+<main class="container-wide" data-section="financials">
+
+  <!-- Spreadsheet Table -->
+  <div class="financial-table-wrap">
+    <table class="financial-table" id="financialTable">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Phase</th>
+          <th>Avg Viewers</th>
+          <th>Followers</th>
+          <th>Subscribers</th>
+          <th class="col-revenue">Sub Revenue</th>
+          <th class="col-revenue">Bits Revenue</th>
+          <th class="col-revenue">Donations</th>
+          <th class="col-revenue">Twitch Ads</th>
+          <th class="col-revenue">YouTube AdSense</th>
+          <th class="col-revenue">Sponsorships</th>
+          <th class="col-revenue">Merchandise</th>
+          <th class="col-revenue">Affiliate</th>
+          <th class="col-revenue">Other Revenue</th>
+          <th class="col-total">TOTAL REVENUE</th>
+          <th class="col-expense">Hardware</th>
+          <th class="col-expense">Software</th>
+          <th class="col-expense">Legal/Admin</th>
+          <th class="col-expense">Contractors</th>
+          <th class="col-expense">Marketing</th>
+          <th class="col-expense">Other Expenses</th>
+          <th class="col-total">TOTAL EXPENSES</th>
+          <th class="col-total">NET PROFIT</th>
+          <th class="col-total">Cumulative</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="financialBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Annual Summary -->
+  <section>
+    <h2 class="gradient-text" style="margin-bottom: 1rem;">Annual Summary</h2>
+    <div class="annual-grid">
+      <div class="annual-card year1-card">
+        <h3>Year 1 (Months 1-12)</h3>
+        <div class="annual-row"><span class="label">Total Revenue</span><span class="value" id="y1Revenue">$0</span></div>
+        <div class="annual-row"><span class="label">Total Expenses</span><span class="value" id="y1Expenses">$0</span></div>
+        <div class="annual-row"><span class="label">Net Profit</span><span class="value" id="y1Profit">$0</span></div>
+        <div class="annual-row"><span class="label">Avg Monthly Revenue</span><span class="value" id="y1AvgRevenue">$0</span></div>
+      </div>
+      <div class="annual-card year2-card">
+        <h3>Year 2 (Months 13-24)</h3>
+        <div class="annual-row"><span class="label">Total Revenue</span><span class="value" id="y2Revenue">$0</span></div>
+        <div class="annual-row"><span class="label">Total Expenses</span><span class="value" id="y2Expenses">$0</span></div>
+        <div class="annual-row"><span class="label">Net Profit</span><span class="value" id="y2Profit">$0</span></div>
+        <div class="annual-row"><span class="label">Avg Monthly Revenue</span><span class="value" id="y2AvgRevenue">$0</span></div>
+      </div>
+      <div class="annual-card year3-card">
+        <h3>Year 3 (Months 25-36)</h3>
+        <div class="annual-row"><span class="label">Total Revenue</span><span class="value" id="y3Revenue">$0</span></div>
+        <div class="annual-row"><span class="label">Total Expenses</span><span class="value" id="y3Expenses">$0</span></div>
+        <div class="annual-row"><span class="label">Net Profit</span><span class="value" id="y3Profit">$0</span></div>
+        <div class="annual-row"><span class="label">Avg Monthly Revenue</span><span class="value" id="y3AvgRevenue">$0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmarks -->
+  <div class="benchmarks-card">
+    <h3>Industry Benchmarks &amp; Formulas</h3>
+    <div class="benchmark-item">
+      <span class="benchmark-label">Sub Revenue (Tier 1)</span>
+      <span class="benchmark-formula">Subscribers x $2.50 (50% of $4.99)</span>
+    </div>
+    <div class="benchmark-item">
+      <span class="benchmark-label">Bits Revenue</span>
+      <span class="benchmark-formula">$0.01 per Bit; avg $50-200/mo early stage</span>
+    </div>
+    <div class="benchmark-item">
+      <span class="benchmark-label">Twitch Ad Revenue</span>
+      <span class="benchmark-formula">$3.50 CPM x (Avg Viewers x Hours x 30) / 1000</span>
+    </div>
+    <div class="benchmark-item">
+      <span class="benchmark-label">YouTube AdSense</span>
+      <span class="benchmark-formula">$2-7 RPM depending on niche</span>
+    </div>
+    <div class="benchmark-item">
+      <span class="benchmark-label">Sponsorship Rate</span>
+      <span class="benchmark-formula">$0.01-0.05 per viewer per hour (scales with engagement)</span>
+    </div>
+    <div class="benchmark-item">
+      <span class="benchmark-label">Follower-to-Sub Conversion</span>
+      <span class="benchmark-formula">2-5% of followers subscribe</span>
+    </div>
+    <div class="benchmark-item">
+      <span class="benchmark-label">Affiliate Commission</span>
+      <span class="benchmark-formula">5-20% per sale; Amazon ~4%</span>
+    </div>
+    <div class="benchmark-item">
+      <span class="benchmark-label">Merch Revenue</span>
+      <span class="benchmark-formula">$5-15 profit per item; ~1-3% of followers buy</span>
+    </div>
+  </div>
+
+  <!-- Year Targets -->
+  <section>
+    <h2 class="gradient-text" style="margin-bottom: 1rem;">Revenue Targets</h2>
+    <div class="year-targets">
+      <div class="year-target-item">
+        <label for="yearTarget1">Year 1 Target Revenue:</label>
+        <span class="input-money-wrap">
+          <input type="number" id="yearTarget1" class="input-money" data-field="financials.yearTargets.year1" placeholder="0">
+        </span>
+      </div>
+      <div class="year-target-item">
+        <label for="yearTarget2">Year 2 Target Revenue:</label>
+        <span class="input-money-wrap">
+          <input type="number" id="yearTarget2" class="input-money" data-field="financials.yearTargets.year2" placeholder="0">
+        </span>
+      </div>
+      <div class="year-target-item">
+        <label for="yearTarget3">Year 3 Target Revenue:</label>
+        <span class="input-money-wrap">
+          <input type="number" id="yearTarget3" class="input-money" data-field="financials.yearTargets.year3" placeholder="0">
+        </span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer"><p>Influencer Planner &mdash; Your roadmap to 1M engaged users</p></footer>
+
+<script src="js/store.js"></script>
+<script src="js/autosave.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/financial-calc.js"></script>
+</body>
+</html>

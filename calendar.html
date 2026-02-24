@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Calendar — Influencer Planner</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/forms.css">
+<style>
+  /* Week navigation */
+  .week-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+  .week-nav .btn {
+    min-width: 130px;
+    text-align: center;
+  }
+  .week-display {
+    text-align: center;
+  }
+  .week-display .week-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .week-display .week-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Calendar table */
+  .calendar-table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .calendar-table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .calendar-table thead {
+    background: var(--bg-secondary);
+  }
+  .calendar-table th {
+    text-align: center;
+    padding: 0.65rem 0.5rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--purple-light);
+    border-bottom: 2px solid var(--purple-primary);
+    white-space: nowrap;
+    min-width: 100px;
+  }
+  .calendar-table th:first-child { min-width: 100px; }
+  .calendar-table td {
+    padding: 0.35rem 0.4rem;
+    border-bottom: 1px solid rgba(47,47,53,0.4);
+    vertical-align: middle;
+  }
+
+  /* Day label cell */
+  .day-cell {
+    font-weight: 700;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    text-align: center;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .day-cell .day-name { display: block; }
+  .day-cell .day-date {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Day color accents */
+  .day-mon .day-cell { border-left: 3px solid var(--purple-primary); }
+  .day-tue .day-cell { border-left: 3px solid var(--pink); }
+  .day-wed .day-cell { border-left: 3px solid var(--cyan); }
+  .day-thu .day-cell { border-left: 3px solid var(--green); }
+  .day-fri .day-cell { border-left: 3px solid var(--yellow); }
+  .day-sat .day-cell { border-left: 3px solid var(--orange); }
+  .day-sun .day-cell { border-left: 3px solid var(--red); }
+
+  /* Second row of same day - no day label, lighter bg */
+  .row-second .day-cell {
+    background: transparent;
+    border-left-color: transparent;
+  }
+
+  .calendar-table tr:hover td { background: rgba(145,70,255,0.03); }
+
+  .calendar-table input[type="time"],
+  .calendar-table input[type="text"],
+  .calendar-table input[type="number"],
+  .calendar-table select {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    width: 100%;
+    min-width: 80px;
+  }
+  .calendar-table input[type="time"] { min-width: 95px; }
+  .calendar-table select { min-width: 140px; }
+  .calendar-table input[type="text"] { min-width: 120px; }
+
+  .calendar-table input:focus,
+  .calendar-table select:focus {
+    border-color: var(--purple-primary);
+    background: var(--bg-primary);
+    outline: none;
+  }
+  .calendar-table select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23848494' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    padding-right: 1.8rem;
+  }
+
+  /* Duration cell (read-only) */
+  .duration-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    text-align: center;
+    color: var(--cyan);
+    font-size: 0.82rem;
+  }
+
+  /* Status colors */
+  .status-done { color: var(--green); }
+  .status-inprogress { color: var(--yellow); }
+  .status-notstarted { color: var(--text-muted); }
+
+  /* Weekly totals */
+  .weekly-totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .total-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+  .total-card .total-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .total-card .total-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .total-card .total-unit {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .total-streaming .total-value { color: var(--purple-light); }
+  .total-content .total-value { color: var(--pink); }
+  .total-community .total-value { color: var(--cyan); }
+  .total-business .total-value { color: var(--yellow); }
+  .total-rest .total-value { color: var(--green); }
+  .total-grand .total-value { color: var(--text-primary); }
+  .total-grand {
+    border-color: var(--purple-primary);
+    background: rgba(145,70,255,0.08);
+  }
+
+  .overwork-warning {
+    display: none;
+    margin: 1rem 0;
+  }
+  .overwork-warning.visible { display: flex; }
+
+  @media (max-width: 768px) {
+    .week-nav { gap: 0.75rem; }
+    .week-display .week-label { font-size: 1rem; }
+    .calendar-table select { min-width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">INFLUENCER PLANNER</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Dashboard</a>
+    <a href="plan.html">Business Plan</a>
+    <a href="deep-dive.html">Twitch Deep Dive</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="templates.html">Templates</a>
+    <a href="financials.html">Financials</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="my-plan.html">My Plan</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>Content Calendar</h1>
+  <p>Plan your weekly content schedule</p>
+  <span class="save-indicator">Saved</span>
+</header>
+
+<main class="container-wide" data-section="calendar">
+
+  <!-- Week Navigation -->
+  <div class="week-nav">
+    <button class="btn btn-secondary" id="prevWeek">&#8592; Previous Week</button>
+    <div class="week-display">
+      <div class="week-label" id="weekLabel">Week of ...</div>
+      <div class="week-date" id="weekDate"></div>
+    </div>
+    <button class="btn btn-secondary" id="nextWeek">Next Week &#8594;</button>
+  </div>
+
+  <!-- Calendar Table -->
+  <div class="calendar-table-wrap">
+    <table class="calendar-table" id="calendarTable">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Time Start</th>
+          <th>Time End</th>
+          <th>Activity Type</th>
+          <th>Description</th>
+          <th>Platform</th>
+          <th>Content Pillar</th>
+          <th>Duration (hrs)</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="calendarBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Weekly Totals -->
+  <section>
+    <h2 class="gradient-text" style="margin-bottom: 1rem;">Weekly Totals</h2>
+    <div class="weekly-totals">
+      <div class="total-card total-streaming">
+        <div class="total-label">Streaming</div>
+        <div class="total-value" id="totalStreaming">0</div>
+        <div class="total-unit">hours</div>
+      </div>
+      <div class="total-card total-content">
+        <div class="total-label">Content Creation</div>
+        <div class="total-value" id="totalContent">0</div>
+        <div class="total-unit">hours</div>
+      </div>
+      <div class="total-card total-community">
+        <div class="total-label">Community</div>
+        <div class="total-value" id="totalCommunity">0</div>
+        <div class="total-unit">hours</div>
+      </div>
+      <div class="total-card total-business">
+        <div class="total-label">Business</div>
+        <div class="total-value" id="totalBusiness">0</div>
+        <div class="total-unit">hours</div>
+      </div>
+      <div class="total-card total-rest">
+        <div class="total-label">Rest / Personal</div>
+        <div class="total-value" id="totalRest">0</div>
+        <div class="total-unit">hours</div>
+      </div>
+      <div class="total-card total-grand">
+        <div class="total-label">Grand Total</div>
+        <div class="total-value" id="totalGrand">0</div>
+        <div class="total-unit">hours</div>
+      </div>
+    </div>
+
+    <div class="callout callout-danger overwork-warning" id="overworkWarning">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-text">
+        <strong>Overwork Warning</strong>
+        Your scheduled hours exceed 60 for this week. Consider redistributing tasks or adding rest days to avoid burnout.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer"><p>Influencer Planner &mdash; Your roadmap to 1M engaged users</p></footer>
+
+<script src="js/store.js"></script>
+<script src="js/autosave.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/calendar.js"></script>
+</body>
+</html>
