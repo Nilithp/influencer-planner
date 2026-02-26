@@ -181,6 +181,7 @@
     <div class="callout callout-warn"><div class="callout-icon">&#x26a0;&#xfe0f;</div><div class="callout-text"><strong>High buying power ≠ "rich people."</strong> It means people with disposable income AND willingness to spend on digital entertainment and creator products.</div></div>
     <div class="form-group">
       <label class="form-label">Target income brackets:</label>
+      <p class="form-hint">Think about who can afford $5-25/mo subs, $50+ merch, and impulse donations. Students engage but rarely spend.</p>
       <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.income50to75"><label>$50K-$75K (comfortable)</label></label>
       <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.income75to125"><label>$75K-$125K (strong)</label></label>
       <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.income125to200"><label>$125K-$200K (high)</label></label>
@@ -189,7 +190,9 @@
     <div class="form-row">
       <div class="form-group"><label class="form-label">Primary sweet spot: $</label><input type="text" data-field="plan.section2.sweetSpotMin" placeholder="min K"> to <input type="text" data-field="plan.section2.sweetSpotMax" placeholder="max K"></div>
     </div>
-    <div class="form-group"><label class="form-label">Monthly entertainment spend of target user:</label></div>
+    <div class="form-group"><label class="form-label">Monthly entertainment spend of target user:</label>
+      <p class="form-hint">Average US gamer spends ~$76/mo. Twitch viewers average $15-30/mo on subs alone.</p>
+    </div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Streaming subs $/mo</label><input type="number" data-field="plan.section2.spendStreaming" placeholder="$"></div>
       <div class="form-group"><label class="form-label">Gaming $/mo</label><input type="number" data-field="plan.section2.spendGaming" placeholder="$"></div>
@@ -212,6 +215,7 @@
       </div>
     </div>
     <div class="form-group"><label class="form-label">Geography</label>
+      <p class="form-hint">English-speaking markets have highest ad CPMs. US/CA viewers worth 3-5x international for sponsors.</p>
       <div class="radio-group">
         <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.geoUS"><label>US-only</label></label>
         <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.geoUSCA"><label>US + Canada</label></label>
@@ -220,6 +224,7 @@
       </div>
     </div>
     <div class="form-group"><label class="form-label">Top 5 Target Cities/Regions</label>
+      <p class="form-hint">e.g., Los Angeles, Austin, London, Toronto, San Francisco — think where your niche audience clusters.</p>
       <input type="text" data-field="plan.section2.city1" placeholder="1." style="margin-bottom:0.4rem">
       <input type="text" data-field="plan.section2.city2" placeholder="2." style="margin-bottom:0.4rem">
       <input type="text" data-field="plan.section2.city3" placeholder="3." style="margin-bottom:0.4rem">
@@ -227,6 +232,7 @@
       <input type="text" data-field="plan.section2.city5" placeholder="5.">
     </div>
     <div class="form-group"><label class="form-label">Occupation Clusters</label>
+      <p class="form-hint">Tech and finance workers are highest-spending Twitch demographics by disposable income.</p>
       <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.occTech"><label>Tech/Software</label></label>
       <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.occFinance"><label>Finance/Business</label></label>
       <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.occCreative"><label>Creative/Design</label></label>
@@ -250,18 +256,34 @@
       <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.valCreativity"><label>Creativity / Expression</label></label>
     </div>
     <div class="form-group"><label class="form-label">Brands your ideal viewer spends money on (list 10):</label>
+      <p class="form-hint">e.g., Razer, Nike, Red Bull, Logitech, Corsair, GFuel, Spotify, Apple, NZXT, HyperX</p>
       <textarea data-field="plan.section2.brandsList" rows="2" placeholder="Brand 1, Brand 2, Brand 3..."></textarea>
     </div>
     <div class="form-group"><label class="form-label">Creators your ideal viewer follows:</label>
+      <p class="form-hint">These define the "neighborhood" you're moving into — your audience already lives here.</p>
       <textarea data-field="plan.section2.creatorsList" rows="2" placeholder="Creator names..."></textarea>
     </div>
     <div class="form-group"><label class="form-label">Free time activities besides streams:</label>
-      <textarea data-field="plan.section2.freeTime" rows="2" placeholder="What do they do besides watch streams?"></textarea>
+      <div class="option-select">
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftGaming"><label>Gaming</label></label>
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftFitness"><label>Fitness/Gym</label></label>
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftCoding"><label>Coding/Tech</label></label>
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftCooking"><label>Cooking</label></label>
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftSports"><label>Sports</label></label>
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftMusic"><label>Music</label></label>
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftReading"><label>Reading/Podcasts</label></label>
+        <label class="radio-wrap"><input type="checkbox" data-field="plan.section2.ftOutdoors"><label>Outdoors</label></label>
+      </div>
+      <div class="custom-input-row">
+        <label class="form-label" style="margin-bottom:0;white-space:nowrap;">Write my own:</label>
+        <textarea data-field="plan.section2.freeTime" rows="2" placeholder="Other activities..."></textarea>
+      </div>
     </div>
   </div>
 
   <div class="card-full">
     <h3>2.4 Platform Behavior Profile</h3>
+    <p class="form-hint">Average Twitch viewer watches ~95 min/day. Core fans do 2-4 hrs/day across platforms.</p>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Hrs/week on Twitch</label><input type="number" data-field="plan.section2.hrsTwitch" placeholder="hrs"></div>
       <div class="form-group"><label class="form-label">Hrs/week on YouTube</label><input type="number" data-field="plan.section2.hrsYouTube" placeholder="hrs"></div>
@@ -270,7 +292,7 @@
       <div class="form-group"><label class="form-label">Hrs/week on Tumblr</label><input type="number" data-field="plan.section2.hrsTumblr" placeholder="hrs"></div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Peak active times</label><input type="text" data-field="plan.section2.peakTimes" placeholder="e.g., 7-11pm EST"></div>
+      <div class="form-group"><label class="form-label">Peak active times</label><p class="form-hint">Most Twitch traffic peaks 6-11pm local time. Weekday mornings and late nights are underserved niches.</p><input type="text" data-field="plan.section2.peakTimes" placeholder="e.g., 7-11pm EST"></div>
       <div class="form-group"><label class="form-label">Twitch subs they hold</label><input type="number" data-field="plan.section2.twitchSubs" placeholder="#"></div>
       <div class="form-group"><label class="form-label">Monthly digital spend $</label><input type="number" data-field="plan.section2.monthlyDigital" placeholder="$"></div>
     </div>
@@ -279,47 +301,276 @@
   <div class="card-full">
     <h3>2.5 Content Vertical Selection</h3>
     <div class="callout callout-info"><div class="callout-icon">&#x1f30a;</div><div class="callout-text"><strong>Blue Ocean Strategy:</strong> Instead of competing in a red ocean (saturated category), find the intersection of two verticals that nobody else occupies.</div></div>
-    <div class="form-group"><label class="form-label">Primary content vertical:</label><input type="text" data-field="plan.section2.primaryVertical" placeholder="e.g., Gaming (FPS) + Finance Education"></div>
-    <div class="form-group"><label class="form-label">Secondary vertical (differentiator):</label><input type="text" data-field="plan.section2.secondaryVertical" placeholder="What makes you different?"></div>
+    <div class="form-group"><label class="form-label">Primary content vertical:</label>
+      <div class="option-select">
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Gaming (FPS/Battle Royale)"><label>Gaming (FPS/Battle Royale)</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Gaming (RPG/Story)"><label>Gaming (RPG/Story)</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Just Chatting/IRL"><label>Just Chatting/IRL</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Creative/Art/Design"><label>Creative/Art/Design</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Music/DJ"><label>Music/DJ</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Cooking/Food"><label>Cooking/Food</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Education/Tutorial"><label>Education/Tutorial</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Tech/Coding"><label>Tech/Coding</label></label>
+        <label class="radio-wrap"><input type="radio" name="primaryVertical" data-field="plan.section2.primaryVertical" value="Fitness/Wellness"><label>Fitness/Wellness</label></label>
+      </div>
+      <div class="custom-input-row">
+        <label class="form-label" style="margin-bottom:0;white-space:nowrap;">Write my own:</label>
+        <input type="text" data-field="plan.section2.primaryVerticalCustom" placeholder="e.g., Gaming (FPS) + Finance Education">
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Secondary vertical (differentiator):</label>
+      <div class="option-select">
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Comedy/Entertainment"><label>Comedy/Entertainment</label></label>
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Education/Tips"><label>Education/Tips</label></label>
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Lifestyle/Vlogs"><label>Lifestyle/Vlogs</label></label>
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Finance/Investing"><label>Finance/Investing</label></label>
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Motivation/Mindset"><label>Motivation/Mindset</label></label>
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Fashion/Beauty"><label>Fashion/Beauty</label></label>
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Travel"><label>Travel</label></label>
+        <label class="radio-wrap"><input type="radio" name="secondaryVertical" data-field="plan.section2.secondaryVertical" value="Science"><label>Science</label></label>
+      </div>
+      <div class="custom-input-row">
+        <label class="form-label" style="margin-bottom:0;white-space:nowrap;">Write my own:</label>
+        <input type="text" data-field="plan.section2.secondaryVerticalCustom" placeholder="What makes you different?">
+      </div>
+    </div>
     <div class="form-group"><label class="form-label">Why does this attract high-buying-power users?</label><textarea data-field="plan.section2.whyHighBuying" rows="2" placeholder="Explain the connection..."></textarea></div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Red ocean I'm avoiding:</label><input type="text" data-field="plan.section2.redOcean" placeholder="Saturated category"></div>
+      <div class="form-group"><label class="form-label">Red ocean I'm avoiding:</label><p class="form-hint">Red ocean example: "Fortnite gameplay." Blue ocean example: "Cooking while speedrunning retro games" or "Finance education through gaming analogies."</p><input type="text" data-field="plan.section2.redOcean" placeholder="Saturated category"></div>
       <div class="form-group"><label class="form-label">My blue ocean intersection:</label><input type="text" data-field="plan.section2.blueOcean" placeholder="Vertical A x Vertical B"></div>
     </div>
   </div>
 
   <div class="card-full">
-    <h3>2.6 Audience Persona Cards</h3>
+    <h3>2.6 Ideal Customer Profiles (ICPs)</h3>
+
+    <!-- ===== PERSONA 1: The Core Fan ===== -->
     <h4 style="color:var(--purple-light);margin-bottom:0.75rem;">Persona 1: The Core Fan</h4>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Demographics</h5>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Name</label><input type="text" data-field="plan.section2.p1Name" placeholder="Name"></div>
       <div class="form-group"><label class="form-label">Age</label><input type="number" data-field="plan.section2.p1Age" placeholder="Age"></div>
+      <div class="form-group"><label class="form-label">Gender</label><input type="text" data-field="plan.section2.p1Gender" placeholder="Gender"></div>
+      <div class="form-group"><label class="form-label">Location</label><input type="text" data-field="plan.section2.p1Location" placeholder="City, State"></div>
       <div class="form-group"><label class="form-label">Income</label><input type="text" data-field="plan.section2.p1Income" placeholder="$"></div>
       <div class="form-group"><label class="form-label">Occupation</label><input type="text" data-field="plan.section2.p1Occ" placeholder="Job"></div>
     </div>
-    <div class="form-group"><label class="form-label">Why they watch you:</label><input type="text" data-field="plan.section2.p1Why" placeholder="Reason"></div>
-    <div class="form-group"><label class="form-label">What they buy:</label><input type="text" data-field="plan.section2.p1Buy" placeholder="Products/services"></div>
-    <div class="form-group"><label class="form-label">Lifetime value estimate: $/year</label><input type="text" data-field="plan.section2.p1LTV" placeholder="$"></div>
 
-    <h4 style="color:var(--pink);margin:1.5rem 0 0.75rem;">Persona 2: The Casual-to-Regular Convert</h4>
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Digital Life</h5>
+    <div class="form-group"><label class="form-label">Primary device</label>
+      <div class="radio-group">
+        <label class="radio-wrap"><input type="radio" name="p1Device" data-field="plan.section2.p1Device" value="Desktop"><label>Desktop</label></label>
+        <label class="radio-wrap"><input type="radio" name="p1Device" data-field="plan.section2.p1Device" value="Mobile"><label>Mobile</label></label>
+        <label class="radio-wrap"><input type="radio" name="p1Device" data-field="plan.section2.p1Device" value="Console"><label>Console</label></label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Hours online per day</label><input type="number" data-field="plan.section2.p1HrsOnline" placeholder="hrs"></div>
+      <div class="form-group"><label class="form-label">Top 3 platforms</label><input type="text" data-field="plan.section2.p1Platforms" placeholder="e.g., Twitch, YouTube, Discord"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Content consumption: prefers</label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1PrefLive"><label>Live streams</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1PrefVODs"><label>VODs</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1PrefClips"><label>Short clips</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1PrefPods"><label>Podcasts</label></label>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Pain Points & Goals</h5>
+    <div class="form-group"><label class="form-label">Biggest frustration</label><p class="form-hint">What problem or gap in existing content bothers them?</p><textarea data-field="plan.section2.p1Frustration" rows="2" placeholder="Their biggest pain point..."></textarea></div>
+    <div class="form-group"><label class="form-label">Primary goal</label><p class="form-hint">What are they trying to learn, achieve, or feel?</p><textarea data-field="plan.section2.p1Goal" rows="2" placeholder="What they want to achieve..."></textarea></div>
+    <div class="form-group"><label class="form-label">What keeps them engaged</label><p class="form-hint">Community? Skill improvement? Entertainment? Escapism?</p><textarea data-field="plan.section2.p1Engaged" rows="2" placeholder="Why they keep coming back..."></textarea></div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Spending Behavior</h5>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Monthly entertainment budget ($)</label><input type="number" data-field="plan.section2.p1Budget" placeholder="$"></div>
+    </div>
+    <div class="form-group"><label class="form-label">What they spend on</label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1SpendSubs"><label>Subs</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1SpendDonations"><label>Donations/Bits</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1SpendMerch"><label>Merch</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p1SpendPremium"><label>Premium content</label></label>
+    </div>
+    <div class="form-group"><label class="form-label">Price sensitivity</label>
+      <div class="radio-group">
+        <label class="radio-wrap"><input type="radio" name="p1PriceSens" data-field="plan.section2.p1PriceSens" value="Low"><label>Low — buys impulsively</label></label>
+        <label class="radio-wrap"><input type="radio" name="p1PriceSens" data-field="plan.section2.p1PriceSens" value="Medium"><label>Medium — considers value</label></label>
+        <label class="radio-wrap"><input type="radio" name="p1PriceSens" data-field="plan.section2.p1PriceSens" value="High"><label>High — needs convincing</label></label>
+      </div>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Relationship to You</h5>
+    <div class="form-group"><label class="form-label">Why they follow you</label><textarea data-field="plan.section2.p1Why" rows="2" placeholder="What drew them to your content?"></textarea></div>
+    <div class="form-group"><label class="form-label">What would make them leave</label><p class="form-hint">e.g., inconsistent schedule, toxic community, content shift</p><textarea data-field="plan.section2.p1Leave" rows="2" placeholder="Dealbreakers..."></textarea></div>
+    <div class="form-group"><label class="form-label">What makes them tell friends</label><p class="form-hint">What's the "you HAVE to check this out" moment?</p><textarea data-field="plan.section2.p1TellFriends" rows="2" placeholder="The share trigger..."></textarea></div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Value Estimate</h5>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Estimated $/year</label><input type="number" data-field="plan.section2.p1LTV" placeholder="$"></div>
+      <div class="form-group"><label class="form-label">Primary revenue type</label>
+        <div class="radio-group">
+          <label class="radio-wrap"><input type="radio" name="p1RevType" data-field="plan.section2.p1RevType" value="Sub"><label>Sub</label></label>
+          <label class="radio-wrap"><input type="radio" name="p1RevType" data-field="plan.section2.p1RevType" value="Donations"><label>Donations</label></label>
+          <label class="radio-wrap"><input type="radio" name="p1RevType" data-field="plan.section2.p1RevType" value="Merch"><label>Merch</label></label>
+          <label class="radio-wrap"><input type="radio" name="p1RevType" data-field="plan.section2.p1RevType" value="Sponsor-exposure"><label>Sponsor-exposure value</label></label>
+        </div>
+      </div>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">A Day in Their Life</h5>
+    <div class="form-group"><p class="form-hint">Paint a picture: what does a typical Tuesday look like for this person? When and why do they tune in?</p><textarea data-field="plan.section2.p1DayInLife" rows="3" placeholder="6am: alarm goes off..."></textarea></div>
+
+    <!-- ===== PERSONA 2: The Casual-to-Regular Convert ===== -->
+    <h4 style="color:var(--pink);margin:2rem 0 0.75rem;">Persona 2: The Casual-to-Regular Convert</h4>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Demographics</h5>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Name</label><input type="text" data-field="plan.section2.p2Name" placeholder="Name"></div>
       <div class="form-group"><label class="form-label">Age</label><input type="number" data-field="plan.section2.p2Age" placeholder="Age"></div>
+      <div class="form-group"><label class="form-label">Gender</label><input type="text" data-field="plan.section2.p2Gender" placeholder="Gender"></div>
+      <div class="form-group"><label class="form-label">Location</label><input type="text" data-field="plan.section2.p2Location" placeholder="City, State"></div>
       <div class="form-group"><label class="form-label">Income</label><input type="text" data-field="plan.section2.p2Income" placeholder="$"></div>
       <div class="form-group"><label class="form-label">Occupation</label><input type="text" data-field="plan.section2.p2Occ" placeholder="Job"></div>
     </div>
-    <div class="form-group"><label class="form-label">Why they occasionally tune in:</label><input type="text" data-field="plan.section2.p2Why" placeholder="Reason"></div>
-    <div class="form-group"><label class="form-label">What would make them subscribe:</label><input type="text" data-field="plan.section2.p2Subscribe" placeholder="Trigger"></div>
 
-    <h4 style="color:var(--cyan);margin:1.5rem 0 0.75rem;">Persona 3: The High-Value Whale</h4>
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Digital Life</h5>
+    <div class="form-group"><label class="form-label">Primary device</label>
+      <div class="radio-group">
+        <label class="radio-wrap"><input type="radio" name="p2Device" data-field="plan.section2.p2Device" value="Desktop"><label>Desktop</label></label>
+        <label class="radio-wrap"><input type="radio" name="p2Device" data-field="plan.section2.p2Device" value="Mobile"><label>Mobile</label></label>
+        <label class="radio-wrap"><input type="radio" name="p2Device" data-field="plan.section2.p2Device" value="Console"><label>Console</label></label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Hours online per day</label><input type="number" data-field="plan.section2.p2HrsOnline" placeholder="hrs"></div>
+      <div class="form-group"><label class="form-label">Top 3 platforms</label><input type="text" data-field="plan.section2.p2Platforms" placeholder="e.g., YouTube, TikTok, Instagram"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Content consumption: prefers</label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2PrefLive"><label>Live streams</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2PrefVODs"><label>VODs</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2PrefClips"><label>Short clips</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2PrefPods"><label>Podcasts</label></label>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Pain Points & Goals</h5>
+    <div class="form-group"><label class="form-label">Biggest frustration</label><p class="form-hint">What problem or gap in existing content bothers them?</p><textarea data-field="plan.section2.p2Frustration" rows="2" placeholder="Their biggest pain point..."></textarea></div>
+    <div class="form-group"><label class="form-label">Primary goal</label><p class="form-hint">What are they trying to learn, achieve, or feel?</p><textarea data-field="plan.section2.p2Goal" rows="2" placeholder="What they want to achieve..."></textarea></div>
+    <div class="form-group"><label class="form-label">What keeps them engaged</label><p class="form-hint">Community? Skill improvement? Entertainment? Escapism?</p><textarea data-field="plan.section2.p2Engaged" rows="2" placeholder="Why they keep coming back..."></textarea></div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Spending Behavior</h5>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Monthly entertainment budget ($)</label><input type="number" data-field="plan.section2.p2Budget" placeholder="$"></div>
+    </div>
+    <div class="form-group"><label class="form-label">What they spend on</label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2SpendSubs"><label>Subs</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2SpendDonations"><label>Donations/Bits</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2SpendMerch"><label>Merch</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p2SpendPremium"><label>Premium content</label></label>
+    </div>
+    <div class="form-group"><label class="form-label">Price sensitivity</label>
+      <div class="radio-group">
+        <label class="radio-wrap"><input type="radio" name="p2PriceSens" data-field="plan.section2.p2PriceSens" value="Low"><label>Low — buys impulsively</label></label>
+        <label class="radio-wrap"><input type="radio" name="p2PriceSens" data-field="plan.section2.p2PriceSens" value="Medium"><label>Medium — considers value</label></label>
+        <label class="radio-wrap"><input type="radio" name="p2PriceSens" data-field="plan.section2.p2PriceSens" value="High"><label>High — needs convincing</label></label>
+      </div>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Relationship to You</h5>
+    <div class="form-group"><label class="form-label">Why they follow you</label><textarea data-field="plan.section2.p2Why" rows="2" placeholder="What drew them to your content?"></textarea></div>
+    <div class="form-group"><label class="form-label">What would make them leave</label><p class="form-hint">e.g., inconsistent schedule, toxic community, content shift</p><textarea data-field="plan.section2.p2Leave" rows="2" placeholder="Dealbreakers..."></textarea></div>
+    <div class="form-group"><label class="form-label">What makes them tell friends</label><p class="form-hint">What's the "you HAVE to check this out" moment?</p><textarea data-field="plan.section2.p2TellFriends" rows="2" placeholder="The share trigger..."></textarea></div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Value Estimate</h5>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Estimated $/year</label><input type="number" data-field="plan.section2.p2LTV" placeholder="$"></div>
+      <div class="form-group"><label class="form-label">Primary revenue type</label>
+        <div class="radio-group">
+          <label class="radio-wrap"><input type="radio" name="p2RevType" data-field="plan.section2.p2RevType" value="Sub"><label>Sub</label></label>
+          <label class="radio-wrap"><input type="radio" name="p2RevType" data-field="plan.section2.p2RevType" value="Donations"><label>Donations</label></label>
+          <label class="radio-wrap"><input type="radio" name="p2RevType" data-field="plan.section2.p2RevType" value="Merch"><label>Merch</label></label>
+          <label class="radio-wrap"><input type="radio" name="p2RevType" data-field="plan.section2.p2RevType" value="Sponsor-exposure"><label>Sponsor-exposure value</label></label>
+        </div>
+      </div>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">A Day in Their Life</h5>
+    <div class="form-group"><p class="form-hint">Paint a picture: what does a typical Tuesday look like for this person? When and why do they tune in?</p><textarea data-field="plan.section2.p2DayInLife" rows="3" placeholder="6am: alarm goes off..."></textarea></div>
+
+    <!-- ===== PERSONA 3: The High-Value Whale ===== -->
+    <h4 style="color:var(--cyan);margin:2rem 0 0.75rem;">Persona 3: The High-Value Whale</h4>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Demographics</h5>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Name</label><input type="text" data-field="plan.section2.p3Name" placeholder="Name"></div>
       <div class="form-group"><label class="form-label">Age</label><input type="number" data-field="plan.section2.p3Age" placeholder="Age"></div>
+      <div class="form-group"><label class="form-label">Gender</label><input type="text" data-field="plan.section2.p3Gender" placeholder="Gender"></div>
+      <div class="form-group"><label class="form-label">Location</label><input type="text" data-field="plan.section2.p3Location" placeholder="City, State"></div>
       <div class="form-group"><label class="form-label">Income</label><input type="text" data-field="plan.section2.p3Income" placeholder="$"></div>
       <div class="form-group"><label class="form-label">Occupation</label><input type="text" data-field="plan.section2.p3Occ" placeholder="Job"></div>
     </div>
-    <div class="form-group"><label class="form-label">Why they donate/gift subs:</label><input type="text" data-field="plan.section2.p3Why" placeholder="Motivation"></div>
-    <div class="form-group"><label class="form-label">Estimated lifetime value: $/year</label><input type="text" data-field="plan.section2.p3LTV" placeholder="$"></div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Digital Life</h5>
+    <div class="form-group"><label class="form-label">Primary device</label>
+      <div class="radio-group">
+        <label class="radio-wrap"><input type="radio" name="p3Device" data-field="plan.section2.p3Device" value="Desktop"><label>Desktop</label></label>
+        <label class="radio-wrap"><input type="radio" name="p3Device" data-field="plan.section2.p3Device" value="Mobile"><label>Mobile</label></label>
+        <label class="radio-wrap"><input type="radio" name="p3Device" data-field="plan.section2.p3Device" value="Console"><label>Console</label></label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Hours online per day</label><input type="number" data-field="plan.section2.p3HrsOnline" placeholder="hrs"></div>
+      <div class="form-group"><label class="form-label">Top 3 platforms</label><input type="text" data-field="plan.section2.p3Platforms" placeholder="e.g., Twitch, Discord, Reddit"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Content consumption: prefers</label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3PrefLive"><label>Live streams</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3PrefVODs"><label>VODs</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3PrefClips"><label>Short clips</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3PrefPods"><label>Podcasts</label></label>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Pain Points & Goals</h5>
+    <div class="form-group"><label class="form-label">Biggest frustration</label><p class="form-hint">What problem or gap in existing content bothers them?</p><textarea data-field="plan.section2.p3Frustration" rows="2" placeholder="Their biggest pain point..."></textarea></div>
+    <div class="form-group"><label class="form-label">Primary goal</label><p class="form-hint">What are they trying to learn, achieve, or feel?</p><textarea data-field="plan.section2.p3Goal" rows="2" placeholder="What they want to achieve..."></textarea></div>
+    <div class="form-group"><label class="form-label">What keeps them engaged</label><p class="form-hint">Community? Skill improvement? Entertainment? Escapism?</p><textarea data-field="plan.section2.p3Engaged" rows="2" placeholder="Why they keep coming back..."></textarea></div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Spending Behavior</h5>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Monthly entertainment budget ($)</label><input type="number" data-field="plan.section2.p3Budget" placeholder="$"></div>
+    </div>
+    <div class="form-group"><label class="form-label">What they spend on</label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3SpendSubs"><label>Subs</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3SpendDonations"><label>Donations/Bits</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3SpendMerch"><label>Merch</label></label>
+      <label class="checkbox-wrap"><input type="checkbox" data-field="plan.section2.p3SpendPremium"><label>Premium content</label></label>
+    </div>
+    <div class="form-group"><label class="form-label">Price sensitivity</label>
+      <div class="radio-group">
+        <label class="radio-wrap"><input type="radio" name="p3PriceSens" data-field="plan.section2.p3PriceSens" value="Low"><label>Low — buys impulsively</label></label>
+        <label class="radio-wrap"><input type="radio" name="p3PriceSens" data-field="plan.section2.p3PriceSens" value="Medium"><label>Medium — considers value</label></label>
+        <label class="radio-wrap"><input type="radio" name="p3PriceSens" data-field="plan.section2.p3PriceSens" value="High"><label>High — needs convincing</label></label>
+      </div>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Relationship to You</h5>
+    <div class="form-group"><label class="form-label">Why they follow you</label><textarea data-field="plan.section2.p3Why" rows="2" placeholder="What drew them to your content?"></textarea></div>
+    <div class="form-group"><label class="form-label">What would make them leave</label><p class="form-hint">e.g., inconsistent schedule, toxic community, content shift</p><textarea data-field="plan.section2.p3Leave" rows="2" placeholder="Dealbreakers..."></textarea></div>
+    <div class="form-group"><label class="form-label">What makes them tell friends</label><p class="form-hint">What's the "you HAVE to check this out" moment?</p><textarea data-field="plan.section2.p3TellFriends" rows="2" placeholder="The share trigger..."></textarea></div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">Value Estimate</h5>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Estimated $/year</label><input type="number" data-field="plan.section2.p3LTV" placeholder="$"></div>
+      <div class="form-group"><label class="form-label">Primary revenue type</label>
+        <div class="radio-group">
+          <label class="radio-wrap"><input type="radio" name="p3RevType" data-field="plan.section2.p3RevType" value="Sub"><label>Sub</label></label>
+          <label class="radio-wrap"><input type="radio" name="p3RevType" data-field="plan.section2.p3RevType" value="Donations"><label>Donations</label></label>
+          <label class="radio-wrap"><input type="radio" name="p3RevType" data-field="plan.section2.p3RevType" value="Merch"><label>Merch</label></label>
+          <label class="radio-wrap"><input type="radio" name="p3RevType" data-field="plan.section2.p3RevType" value="Sponsor-exposure"><label>Sponsor-exposure value</label></label>
+        </div>
+      </div>
+    </div>
+
+    <h5 style="margin:0.75rem 0 0.5rem;color:var(--text-secondary);">A Day in Their Life</h5>
+    <div class="form-group"><p class="form-hint">Paint a picture: what does a typical Tuesday look like for this person? When and why do they tune in?</p><textarea data-field="plan.section2.p3DayInLife" rows="3" placeholder="6am: alarm goes off..."></textarea></div>
   </div>
 </section>
 

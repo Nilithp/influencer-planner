@@ -170,6 +170,18 @@ table input::placeholder { color: var(--text-muted); opacity: 0.5; }
 }
 .save-indicator.visible { opacity: 1; }
 
+/* Selectable option chips */
+.option-select { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+.option-select .radio-wrap {
+  background: var(--bg-card); padding: 0.4rem 0.75rem; border-radius: 6px;
+  border: 1px solid var(--border); transition: all 0.2s;
+}
+.option-select .radio-wrap:has(input:checked) {
+  border-color: var(--purple-primary); background: rgba(145,70,255,0.08);
+}
+.custom-input-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
+.custom-input-row input[type="text"], .custom-input-row textarea { flex: 1; }
+
 @media (max-width: 900px) {
   .plan-layout { grid-template-columns: 1fr; }
   .plan-sidebar { display: none; }
